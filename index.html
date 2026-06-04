@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <meta name="description" content="Portal Institucional e da Transparência da Santa Casa de Misericórdia de Lima Duarte. Acompanhe nossos serviços de saúde, corpo clínico e gestão financeira.">
+  <meta name="keywords" content="Santa Casa, Lima Duarte, Saúde, Hospital, Transparência, Corpo Clínico, SUS, Atendimento Médico">
+  <meta name="author" content="AstroByte Tech Innovation">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Santa Casa de Lima Duarte | Institucional e Transparência">
+  <meta property="og:description" content="Saúde com Humanidade. Conheça nossos serviços, nosso corpo clínico e o Portal da Transparência.">
+  <meta property="og:image" content="image_846069.jpg"> <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+
+  <title>Santa Casa de Lima Duarte | Institucional e Transparência</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       VARIÁVEIS DE CORES E LAYOUT
+       ========================================= */
+    :root {
+      /* Paleta Padrão da Marca */
+      --vinho-principal: #5c0618;
+      --vinho-secundario: #7c1228;
+      --dourado-destaque: #c5a059;
+      --dourado-escuro: #aa843f;
+      --dourado-claro: #f9f5eb;
+      --fundo-claro: #fdfdfd;
+      --fundo-cinza: #f8fafc;
+      --texto-escuro: #2c2523;
+      --texto-suave: #64748b;
+      --branco: #ffffff;
+      --borda-cor: #e2e8f0;
+      
+      /* Status e Feedbacks Visuais */
+      --sucesso-cor: #059669;
+      --sucesso-fundo: #d1fae5;
+      --alerta-cor: #d97706;
+      --alerta-fundo: #fef3c7;
+      --info-cor: #0284c7;
+      --info-fundo: #e0f2fe;
+    }
+
+    /* PALETA DE ALTO CONTRASTE (Acessibilidade LBI) */
+    body.alto-contraste {
+      --vinho-principal: #000000;
+      --vinho-secundario: #111111;
+      --dourado-destaque: #ffff00;
+      --dourado-escuro: #cccc00;
+      --dourado-claro: #000000;
+      --fundo-claro: #000000;
+      --fundo-cinza: #1a1a1a;
+      --texto-escuro: #ffffff;
+      --texto-suave: #dddddd;
+      --branco: #000000;
+      --borda-cor: #ffff00;
+      --sucesso-cor: #000000;
+      --sucesso-fundo: #00ff00;
+      --alerta-cor: #000000;
+      --alerta-fundo: #ffff00;
+    }
+
+    /* Resets e Configurações Globais */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; font-size: 16px; transition: font-size 0.3s ease; }
+    body { background-color: var(--fundo-claro); color: var(--texto-escuro); line-height: 1.6; transition: background-color 0.3s, color 0.3s; }
+    
+    /* Utilitários de Layout */
+    .recipiente { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 1.5rem; }
+    .animacao-suave { animation: aparecer 0.5s ease-in-out; }
+    @keyframes aparecer { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* =========================================
+       BARRA DE ACESSIBILIDADE GLOBAL
+       ========================================= */
+    .barra-acessibilidade { background-color: #5c0618; color: #ffffff; padding: 0.4rem 0; font-size: 0.85rem; border-bottom: 2px solid var(--dourado-destaque); position: relative; z-index: 1100; }
+    .barra-acessibilidade .recipiente { display: flex; justify-content: flex-end; gap: 1.5rem; align-items: center; }
+    .btn-acesso { background: none; border: none; color: #ffffff; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; font-size: 0.9rem; transition: color 0.3s; padding: 2px 5px; }
+    .btn-acesso:hover, .btn-acesso:focus { color: var(--dourado-destaque); outline: 2px solid var(--dourado-destaque); text-decoration: underline; border-radius: 4px; }
+
+    /* =========================================
+       CABEÇALHO INSTITUCIONAL
+       ========================================= */
+    .cabecalho-site { background-color: var(--vinho-principal); box-shadow: 0 4px 20px rgb(253, 253, 253); position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--dourado-destaque); transition: background-color  0.3s; }
+    .cabecalho-conteiner { display: flex; justify-content: space-between; align-items: center; height: 90px; }
+    .logotipo { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; font-size: 1.2rem; color: var(--branco); text-decoration: none; }
+    
+    .menu-principal { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .menu-principal a, .menu-principal button { text-decoration: none; color: var(--branco); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; background: none; border: none; cursor: pointer; }
+    .menu-principal a:hover, .menu-principal button:hover, .menu-principal a:focus { color: var(--dourado-destaque); outline: none; }
+    
+    .menu-dropdown { position: relative; display: inline-block; }
+    .conteudo-dropdown { display: none; position: absolute; background-color: var(--branco); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); z-index: 1; border-radius: 8px; top: 100%; border-top: 3px solid var(--dourado-destaque); overflow: hidden; }
+    .conteudo-dropdown a { color: var(--texto-escuro); padding: 12px 16px; text-decoration: none; display: block; font-weight: 500; border-bottom: 1px solid var(--borda-cor); }
+    .conteudo-dropdown a:hover { background-color: var(--fundo-cinza); color: var(--vinho-principal); }
+    .menu-dropdown:hover .conteudo-dropdown, .menu-dropdown:focus-within .conteudo-dropdown { display: block; }
+
+    .botao-transparencia { color: var(--branco) !important; font-weight: 700 !important; display: flex; align-items: center; gap: 5px; }
+    .botao-mobile { display: none; background: none; border: none; font-size: 2rem; color: var(--vinho-principal); cursor: pointer; }
+
+    /* =========================================
+       SEÇÕES INSTITUCIONAIS (SITE)
+       ========================================= */
+    .secao-espacamento { padding: 5rem 0; }
+    .secao-fundo-alt { background-color: var(--fundo-cinza); }
+    
+    .titulo-secao { text-align: center; margin-bottom: 3rem; }
+    .titulo-secao h2 { font-size: 2.5rem; color: var(--vinho-principal); margin-bottom: 0.5rem; }
+    .titulo-secao p { color: var(--texto-suave); font-size: 1.1rem; max-width: 800px; margin: 0 auto; }
+
+    /* Hero / Home COM FOTO ESCURECIDA */
+    .hero-banner { 
+      /* Gradiente mais escuro e fechado para leitura perfeita */
+      background-image: linear-gradient(rgba(196, 195, 195, 0.295), rgba(228, 228, 228, 0.486)), url('img/Captura\ de\ tela\ 2026-06-03\ 203616.png');
+      background-size: cover;
+      background-position: center;
+      color:  #000000; 
+      padding: 10rem 0; 
+      text-align: center; 
+      border-bottom: 4px solid var(--dourado-destaque); 
+    }
+
+    .hero-banner .recipiente p {color: #000000; font-weight: 800;}
+
+
+
+    body.alto-contraste .hero-banner { 
+      background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.98)), url('img/Captura\ de\ tela\ 2026-06-03\ 203616.png'); 
+      border-bottom: 4px solid var(--dourado-destaque); 
+    }
+    .hero-banner h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .hero-banner p { font-size: 1.3rem; margin-bottom: 2.5rem; color: var(--dourado-claro); max-width: 800px; margin-left: auto; margin-right: auto; }
+    .botao-primario { background-color: var(--dourado-destaque); color: var(--vinho-principal); border: none; padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; }
+    .botao-primario:hover, .botao-primario:focus { background-color: #dfba6b; transform: translateY(-2px); outline: 2px solid #ffffff; }
+
+    /* Grades */
+    .grade-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center; }
+    .grade-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .grade-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; } /* Usado no Corpo Clínico */
+
+    /* Notícias */
+    .cartao-noticia { background: var(--branco); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--borda-cor); transition: 0.3s; display: flex; flex-direction: column; }
+    .cartao-noticia:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(92, 6, 24, 0.1); }
+    .img-noticia { width: 100%; height: 200px; object-fit: cover; }
+    .conteudo-noticia { padding: 1.5rem; flex: 1; }
+    .data-noticia { color: var(--dourado-escuro); font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.5rem; }
+    .titulo-noticia { color: var(--vinho-principal); font-size: 1.2rem; margin-bottom: 1rem; line-height: 1.4; }
+
+    /* Corpo Clínico */
+    .cartao-medico { background: var(--branco); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--borda-cor); transition: 0.3s; display: flex; flex-direction: column; }
+    .cartao-medico:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(92, 6, 24, 0.1); border-color: var(--dourado-destaque); }
+    .foto-medico { width: 100%; height: 280px; object-fit: cover; background-color: var(--fundo-cinza); border-bottom: 3px solid var(--dourado-destaque); }
+    .info-medico { padding: 1.5rem; }
+    .info-medico h3 { color: var(--vinho-principal); font-size: 1.15rem; margin-bottom: 0.3rem; }
+    .info-medico p { color: var(--texto-suave); font-size: 0.9rem; font-weight: 600; }
+    .crm-medico { display: inline-block; background: var(--fundo-cinza); color: var(--texto-escuro); font-size: 0.8rem; padding: 0.2rem 0.6rem; border-radius: 4px; margin-top: 0.5rem; border: 1px solid var(--borda-cor); }
+
+    /* Serviços */
+    .grade-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .coluna-servico h3 { color: var(--vinho-principal); font-size: 1.2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--dourado-destaque); padding-bottom: 0.5rem; }
+    .coluna-servico ul { list-style: none; }
+    .coluna-servico li { margin-bottom: 0.8rem; color: var(--texto-suave); position: relative; padding-left: 1.5rem; font-size: 0.95rem; }
+    .coluna-servico li::before { content: '•'; color: var(--dourado-destaque); font-size: 1.5rem; position: absolute; left: 0; top: -5px; }
+
+    /* Doações */
+    .caixa-doacao { background: var(--branco); padding: 3rem; border-radius: 12px; border-left: 6px solid var(--dourado-destaque); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .chave-pix { background: var(--fundo-cinza); padding: 1rem; border: 2px dashed var(--dourado-destaque); text-align: center; font-size: 1.5rem; font-weight: 700; color: var(--vinho-principal); border-radius: 8px; margin: 1.5rem 0; letter-spacing: 2px; user-select: all; }
+
+    /* Rodapé */
+    .rodape { background-color: #1a0206; color: var(--branco); padding: 4rem 0 2rem 0; border-top: 4px solid var(--dourado-destaque); }
+    body.alto-contraste .rodape { background-color: #000000; border-top: 4px solid #ffff00; }
+    .grade-rodape { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; }
+    .secao-rodape h4 { color: var(--dourado-destaque); margin-bottom: 1.5rem; font-weight: 600; }
+    .secao-rodape p, .secao-rodape a { color: rgba(255, 255, 255, 0.75); margin-bottom: 0.75rem; display: block; text-decoration: none; transition: 0.3s; }
+    body.alto-contraste .secao-rodape p, body.alto-contraste .secao-rodape a { color: #ffffff; }
+    .secao-rodape a:hover, .secao-rodape a:focus { color: var(--dourado-destaque); outline: none; }
+    .direitos-rodape { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); }
+
+    /* =========================================
+       PORTAL DA TRANSPARÊNCIA (SaaS)
+       ========================================= */
+    .cabecalho-transparencia { background: var(--branco); padding: 1rem 0; border-bottom: 3px solid var(--dourado-destaque); }
+    .botao-voltar { padding: 0.6rem 1.2rem; border: 2px solid var(--vinho-principal); color: var(--vinho-principal); background: transparent; cursor: pointer; border-radius: 6px; font-weight: 600; transition: 0.3s; }
+    .botao-voltar:hover, .botao-voltar:focus { background: var(--vinho-principal); color: var(--branco); }
+
+    .layout-transparencia { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; margin: 2rem auto; max-width: 1400px; padding: 0 1.5rem; align-items: start; }
+    
+    /* MENU LATERAL DO SISTEMA */
+    .barra-lateral-sistema { background: var(--vinho-principal); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); position: sticky; top: 20px; }
+    .cabecalho-barra { padding: 1.5rem; background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
+    .cabecalho-barra h3 { color: var(--dourado-claro); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+    
+    .aba-link { display: flex; align-items: center; gap: 10px; padding: 1.2rem 1.5rem; color: var(--branco); text-decoration: none; font-weight: 500; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .aba-link:hover, .aba-link:focus { background: rgba(255,255,255,0.05); color: var(--dourado-destaque); outline: none; }
+    .aba-link.ativo { background: rgba(0,0,0,0.15); color: var(--dourado-destaque); border-left: 4px solid var(--dourado-destaque); font-weight: 700; }
+
+    /* CONTEÚDO DOS PAINÉIS */
+    .painel-conteudo { background: var(--branco); padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--borda-cor); display: none; }
+    .painel-conteudo.ativo { display: block; }
+    
+    .cabecalho-painel { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--fundo-cinza); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    .cabecalho-painel h2 { color: var(--vinho-principal); font-size: 1.8rem; }
+    
+    /* Filtros Avançados */
+    .barra-filtros { background: var(--fundo-cinza); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid var(--borda-cor); display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
+    .grupo-filtro { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; min-width: 200px; }
+    .grupo-filtro label { font-size: 0.85rem; font-weight: 600; color: var(--texto-suave); text-transform: uppercase; }
+    .campo-filtro { padding: 0.8rem; border: 1px solid var(--borda-cor); border-radius: 6px; outline: none; font-family: 'Inter', sans-serif; background: var(--branco); color: var(--texto-escuro); }
+    .campo-filtro:focus { border-color: var(--dourado-destaque); }
+    .botao-filtrar { background: var(--vinho-principal); color: var(--branco); border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.3s; height: 42px; }
+    .botao-filtrar:hover { background: var(--vinho-secundario); }
+
+    /* Blocos de Tabelas */
+    .bloco-dados { margin-bottom: 3rem; }
+    .titulo-bloco { background: var(--fundo-cinza); padding: 1rem 1.5rem; border-left: 5px solid var(--dourado-destaque); color: var(--vinho-principal); font-size: 1.2rem; font-weight: 700; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+
+    /* Cards Dash */
+    .grade-resumo { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .cartao-resumo { background: var(--branco); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--borda-cor); border-top: 4px solid var(--dourado-destaque); box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+    .valor-resumo { font-size: 2rem; font-weight: 700; color: var(--vinho-principal); margin-top: 0.5rem; }
+    
+    /* Tabelas Premium */
+    .tabela-responsiva { overflow-x: auto; background: var(--branco); border-radius: 8px; border: 1px solid var(--borda-cor); }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { background: var(--fundo-cinza); color: var(--texto-escuro); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; padding: 1.2rem 1rem; border-bottom: 2px solid var(--borda-cor); }
+    td { padding: 1.2rem 1rem; border-bottom: 1px solid var(--borda-cor); font-size: 0.95rem; color: var(--texto-escuro); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background-color: var(--fundo-cinza); }
+    
+    .etiqueta { padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; display: inline-block; border: 1px solid transparent; }
+    body.alto-contraste .etiqueta { border-color: var(--branco); }
+    .etiqueta-sucesso { background: var(--sucesso-fundo); color: var(--sucesso-cor); }
+    .etiqueta-alerta { background: var(--alerta-fundo); color: var(--alerta-cor); }
+    .etiqueta-info { background: var(--info-fundo); color: var(--info-cor); }
+    
+    .link-acao { color: var(--dourado-escuro); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+    .link-acao:hover, .link-acao:focus { color: var(--vinho-principal); text-decoration: underline; outline: none; }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 900px) { 
+      .layout-transparencia { grid-template-columns: 1fr; } 
+      .barra-lateral-sistema { position: relative; top: 0; }
+      .botao-mobile { display: block; }
+      .nav-primaria { display: none; position: absolute; top: 90px; left: 0; width: 100%; background: var(--branco); border-bottom: 3px solid var(--dourado-destaque); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+      .nav-primaria.aberto { display: block; }
+      .menu-principal { flex-direction: column; padding: 2rem; gap: 1.5rem; align-items: flex-start; }
+      .conteudo-dropdown { position: relative; box-shadow: none; border: none; padding-left: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="barra-acessibilidade" role="banner">
+    <div class="recipiente">
+      <button class="btn-acesso" onclick="alterarFonte('diminuir')" aria-label="Diminuir tamanho da fonte">A-</button>
+      <button class="btn-acesso" onclick="alterarFonte('aumentar')" aria-label="Aumentar tamanho da fonte">A+</button>
+      <button class="btn-acesso" onclick="alternarContraste()" aria-label="Ativar modo de Alto Contraste">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/></svg> Alto Contraste
+      </button>
+    </div>
+  </div>
+
+  <div id="visao-institucional" class="animacao-suave" role="main">
+    
+    <header class="cabecalho-site">
+      <div class="recipiente cabecalho-conteiner">
+        <a href="#home" class="logotipo" aria-label="Página inicial Santa Casa de Lima Duarte">
+          <svg width="40" height="40" viewBox="0 0 50 50" fill="none" aria-hidden="true">
+            <rect width="50" height="50" rx="8" fill="var(--branco)"/>
+            <path d="M25 15V35M15 25H35" stroke="var(--dourado-destaque)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          Santa Casa de Lima Duarte
+        </a>
+        <button class="botao-mobile" onclick="alternarMenu()" aria-label="Abrir menu de navegação" aria-expanded="false">☰</button>
+        <nav class="nav-primaria" id="menu-navegacao" role="navigation" aria-label="Menu principal">
+          <ul class="menu-principal">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#historia">História</a></li>
+            <li><a href="#noticias">Notícias</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#corpo-clinico">Corpo Clínico</a></li> <li class="menu-dropdown">
+              <a href="#doacoes" aria-haspopup="true" aria-expanded="false">Doações ⌄</a>
+              <div class="conteudo-dropdown" role="menu">
+                <a href="#doacoes" role="menuitem">Como doar?</a>
+              </div>
+            </li>
+            <li><button onclick="trocarVisao('transparencia')" class="botao-transparencia" aria-label="Acessar o Portal da Transparência">📊 Portal da Transparência</button></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero-banner" aria-labelledby="titulo-hero">
+        <div class="recipiente">
+          <h1 id="titulo-hero">Saúde com Humanidade</h1>
+          <p>A Santa Casa de Misericórdia de Lima Duarte está comprometida em oferecer atendimento de qualidade, ético e humanizado para toda a comunidade.</p>
+          <a href="#servicos" class="botao-primario">Conheça nossos serviços</a>
+        </div>
+      </section>
+
+      <section id="historia" class="secao-espacamento" aria-labelledby="titulo-historia">
+        <div class="recipiente grade-2">
+          <div>
+            <h2 id="titulo-historia" style="font-size: 2.5rem; color: var(--vinho-principal); margin-bottom: 1.5rem;">Conheça a nossa história</h2>
+            <p style="margin-bottom: 1rem; color: var(--texto-suave); font-size: 1.1rem; line-height: 1.8;">Fundada há décadas pelo esforço conjunto da comunidade e de benfeitores, a Santa Casa de Lima Duarte nasceu com a missão de amparar os mais necessitados.</p>
+            <p style="color: var(--texto-suave); font-size: 1.1rem; line-height: 1.8;">Hoje, somos referência regional em saúde, unindo a tradição do cuidado acolhedor com a modernização de nossos equipamentos e instalações.</p>
+          </div>
+          <div>
+            <img src="img/Captura de tela 2026-06-03 203616.png" alt="Foto da fachada do hospital Santa Casa de Lima Duarte" style="width: 100%; border-radius: 12px; border: 4px solid var(--dourado-destaque); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+          </div>
+        </div>
+      </section>
+
+      <section id="noticias" class="secao-espacamento secao-fundo-alt" aria-labelledby="titulo-noticias">
+        <div class="recipiente">
+          <div class="titulo-secao">
+            <h2 id="titulo-noticias">Últimas Notícias</h2>
+            <p>Acompanhe as novidades, campanhas e melhorias da nossa instituição.</p>
+          </div>
+          <div class="grade-3">
+            <article class="cartao-noticia">
+              <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=600&auto=format&fit=crop" class="img-noticia" alt="Novos equipamentos médicos">
+              <div class="conteudo-noticia">
+                <span class="data-noticia">15 de Junho, 2026</span>
+                <h3 class="titulo-noticia">Novos equipamentos de Raio-X entram em operação</h3>
+                <p style="color: var(--texto-suave); font-size: 0.95rem;">Graças a emendas parlamentares, modernizamos nosso setor de imagem para diagnósticos mais rápidos.</p>
+              </div>
+            </article>
+            <article class="cartao-noticia">
+              <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=600&auto=format&fit=crop" class="img-noticia" alt="Bolsa de sangue">
+              <div class="conteudo-noticia">
+                <span class="data-noticia">02 de Junho, 2026</span>
+                <h3 class="titulo-noticia">Campanha de Doação de Sangue bate recorde</h3>
+                <p style="color: var(--texto-suave); font-size: 0.95rem;">A comunidade compareceu em peso e conseguimos abastecer nosso banco de sangue para o inverno.</p>
+              </div>
+            </article>
+            <article class="cartao-noticia">
+              <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=600&auto=format&fit=crop" class="img-noticia" alt="Médicos no corredor">
+              <div class="conteudo-noticia">
+                <span class="data-noticia">28 de Maio, 2026</span>
+                <h3 class="titulo-noticia">Ampliação do corpo clínico no Pronto Atendimento</h3>
+                <p style="color: var(--texto-suave); font-size: 0.95rem;">Visando diminuir o tempo de espera, dois novos plantonistas foram integrados à equipe diurna.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="servicos" class="secao-espacamento" aria-labelledby="titulo-servicos">
+        <div class="recipiente">
+          <div class="titulo-secao">
+            <h2 id="titulo-servicos">Informações e Serviços</h2>
+            <p>Conheça nossas especialidades e orientações para atendimento.</p>
+          </div>
+          <div class="grade-servicos">
+            <div class="coluna-servico">
+              <h3>Especialidades Médicas</h3>
+              <ul>
+                <li>Ginecologia</li>
+                <li>Ortopedia</li>
+                <li>Anestesiologia</li>
+                <li>Dermatologia</li>
+                <li>Urologia</li>
+                <li>Traumatologia</li>
+                <li>Cirurgia Geral</li>
+              </ul>
+            </div>
+            <div class="coluna-servico">
+              <h3>Exames e Diagnósticos</h3>
+              <ul>
+                <li>Ultrassonografia</li>
+                <li>Raio-X Digital</li>
+                <li>Exames Laboratoriais</li>
+              </ul>
+            </div>
+            <div class="coluna-servico">
+              <h3>Internações e Cirurgias</h3>
+              <ul>
+                <li>Cirurgia Geral</li>
+                <li>Cirurgia Ginecológica</li>
+                <li>Cirurgia Ortopédica (Joelho)</li>
+                <li>Cirurgia Dermatológica</li>
+              </ul>
+            </div>
+            <div class="coluna-servico">
+              <h3>Orientações Pacientes</h3>
+              <ul>
+                <li>Internação feita previamente.</li>
+                <li>Trazer RG, CPF e Cartão SUS.</li>
+                <li>Visitas Diurnas: 14h às 16h (Máx 4).</li>
+                <li>Visitas Noturnas: 20h às 21h (Máx 2).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="corpo-clinico" class="secao-espacamento secao-fundo-alt" aria-labelledby="titulo-equipe">
+        <div class="recipiente">
+          <div class="titulo-secao">
+            <h2 id="titulo-equipe">Corpo Clínico</h2>
+            <p>Conheça os profissionais de saúde dedicados ao seu bem-estar e cuidado contínuo.</p>
+          </div>
+          <div class="grade-4">
+            <article class="cartao-medico">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80" alt="Retrato do Dr. Carlos Mendes" class="foto-medico">
+              <div class="info-medico">
+                <h3>Dr. Carlos Mendes</h3>
+                <p>Cirurgia Geral</p>
+                <span class="crm-medico">CRM-MG 12345</span>
+              </div>
+            </article>
+            <article class="cartao-medico">
+              <img src="https://images.unsplash.com/photo-1594824406967-1a116df56157?auto=format&fit=crop&w=400&q=80" alt="Retrato da Dra. Ana Silveira" class="foto-medico">
+              <div class="info-medico">
+                <h3>Dra. Ana Silveira</h3>
+                <p>Ginecologia e Obstetrícia</p>
+                <span class="crm-medico">CRM-MG 54321</span>
+              </div>
+            </article>
+            <article class="cartao-medico">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80" alt="Retrato do Dr. Roberto Nunes" class="foto-medico">
+              <div class="info-medico">
+                <h3>Dr. Roberto Nunes</h3>
+                <p>Ortopedia e Traumatologia</p>
+                <span class="crm-medico">CRM-MG 98765</span>
+              </div>
+            </article>
+            <article class="cartao-medico">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80" alt="Retrato da Dra. Mariana Costa" class="foto-medico">
+              <div class="info-medico">
+                <h3>Dra. Mariana Costa</h3>
+                <p>Dermatologia</p>
+                <span class="crm-medico">CRM-MG 45678</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="doacoes" class="secao-espacamento" aria-labelledby="titulo-doacoes">
+        <div class="recipiente grade-2">
+          <div>
+            <h2 id="titulo-doacoes" style="font-size: 2.5rem; color: var(--vinho-principal); margin-bottom: 1rem;">Ajude a salvar vidas</h2>
+            <p style="font-size: 1.1rem; color: var(--texto-suave); margin-bottom: 1.5rem;">Sua doação é fundamental para mantermos o atendimento gratuito a quem mais precisa. Os recursos são investidos em insumos, medicamentos e manutenção estrutural.</p>
+            <ul style="list-style: none; margin-bottom: 2rem;">
+              <li style="margin-bottom: 10px; display: flex; gap: 10px;" aria-label="Transparência total">✅ <strong>Transparência total:</strong> Acompanhe as contas no portal.</li>
+              <li style="margin-bottom: 10px; display: flex; gap: 10px;" aria-label="Impacto local">✅ <strong>Impacto local:</strong> O dinheiro fica na sua cidade.</li>
+            </ul>
+          </div>
+          <div class="caixa-doacao" aria-labelledby="titulo-pix">
+            <h3 id="titulo-pix" style="color: var(--vinho-principal); font-size: 1.5rem; text-align: center;">Faça sua doação via PIX</h3>
+            <p style="text-align: center; color: var(--texto-suave); margin-top: 10px;">Chave CNPJ da Santa Casa:</p>
+            <div class="chave-pix" aria-label="Chave PIX CNPJ 21 milhões 432 mil 555 mil contra 0001 99">21.432.555/0001-99</div>
+            <p style="text-align: center; font-size: 0.9rem; color: var(--texto-suave);">Banco do Brasil - Agência 1234-5<br>Titular: Irmandade da Santa Casa de LD</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape" role="contentinfo">
+      <div class="recipiente grade-rodape">
+        <div class="secao-rodape">
+          <h4>Santa Casa</h4>
+          <p>Compromisso com a saúde e bem-estar da população de Lima Duarte e região.</p>
+        </div>
+        <div class="secao-rodape" role="navigation" aria-label="Links rápidos">
+          <h4>Acesso Rápido</h4>
+          <a href="#historia">Nossa História</a>
+          <a href="#corpo-clinico">Corpo Clínico</a>
+          <a href="#" onclick="trocarVisao('transparencia'); return false;">Transparência Pública</a>
+        </div>
+        <div class="secao-rodape">
+          <h4>Contato</h4>
+          <p>Portaria: (32) 3281-1222</p>
+          <p>Administração: (32) 3281-1410</p>
+          <p>CEP: 36140-000 - Lima Duarte, MG</p>
+        </div>
+      </div>
+      <div class="direitos-rodape">
+        <p>&copy; 2026 Santa Casa de Misericórdia de Lima Duarte. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+  </div>
+
+
+  <div id="visao-transparencia" class="animacao-suave" style="display: none; background-color: var(--fundo-cinza); min-height: 100vh;" aria-live="polite">
+    
+    <header class="cabecalho-transparencia">
+      <div class="recipiente cabecalho-conteiner">
+        <div class="logotipo">
+          <svg width="32" height="32" viewBox="0 0 50 50" fill="none" aria-hidden="true">
+            <rect width="50" height="50" rx="8" fill="var(--vinho-principal)"/>
+            <path d="M15 25H35M15 15H35M15 35H25" stroke="var(--dourado-destaque)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          Portal da Transparência Avançado
+        </div>
+        <button onclick="trocarVisao('institucional')" class="botao-voltar" aria-label="Voltar para a página inicial do site">← Voltar ao Site Institucional</button>
+      </div>
+    </header>
+
+    <div class="layout-transparencia">
+      
+      <aside class="barra-lateral-sistema">
+        <div class="cabecalho-barra">
+          <h3>Módulos Governamentais</h3>
+        </div>
+        <nav id="menu-transparencia" role="tablist" aria-orientation="vertical">
+          <a class="aba-link ativo" onclick="abrirAba(event, 'aba-financas')" role="tab" aria-selected="true" tabindex="0"><span>📊</span> Orçamento e Finanças</a>
+          <a class="aba-link" onclick="abrirAba(event, 'aba-repasses')" role="tab" aria-selected="false" tabindex="0"><span>🏦</span> Repasses e Convênios</a>
+          <a class="aba-link" onclick="abrirAba(event, 'aba-licitacoes')" role="tab" aria-selected="false" tabindex="0"><span>📜</span> Licitações e Compras</a>
+          <a class="aba-link" onclick="abrirAba(event, 'aba-rh')" role="tab" aria-selected="false" tabindex="0"><span>👥</span> Recursos Humanos</a>
+          <a class="aba-link" onclick="abrirAba(event, 'aba-relatorios')" role="tab" aria-selected="false" tabindex="0"><span>📁</span> Auditorias e Relatórios</a>
+        </nav>
+      </aside>
+
+      <main>
+        
+        <div id="aba-financas" class="painel-conteudo ativo animacao-suave" role="tabpanel">
+          <div class="cabecalho-painel">
+            <h2>Execução Orçamentária e Financeira</h2>
+            <span class="etiqueta etiqueta-info">Exercício 2026</span>
+          </div>
+          
+          <form class="barra-filtros" aria-label="Filtros de orçamento">
+            <div class="grupo-filtro">
+              <label for="filtro-ano">Ano Exercício</label>
+              <select id="filtro-ano" class="campo-filtro"><option>2026</option><option>2025</option></select>
+            </div>
+            <div class="grupo-filtro">
+              <label for="filtro-mes">Mês de Referência</label>
+              <select id="filtro-mes" class="campo-filtro"><option>Todos os meses</option><option>Junho</option><option>Maio</option></select>
+            </div>
+            <button type="button" class="botao-filtrar" aria-label="Aplicar filtros de busca">Aplicar Filtros</button>
+          </form>
+
+          <div class="grade-resumo">
+            <div class="cartao-resumo">
+              <div style="color: var(--texto-suave); font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;" aria-hidden="true">ARRECADAÇÃO TOTAL</div>
+              <div class="valor-resumo" style="color: var(--sucesso-cor);" aria-label="Arrecadação total de 4 milhões e 250 mil reais">R$ 4.250.000,00</div>
+            </div>
+            <div class="cartao-resumo">
+              <div style="color: var(--texto-suave); font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;" aria-hidden="true">DESPESA EMPENHADA</div>
+              <div class="valor-resumo" aria-label="Despesa empenhada de 3 milhões e 810 mil reais">R$ 3.810.000,00</div>
+            </div>
+          </div>
+
+          <div class="bloco-dados">
+            <div class="titulo-bloco">Detalhamento de Receitas e Despesas (Mensal)</div>
+            <div class="tabela-responsiva">
+              <table aria-label="Tabela de detalhamento de receitas e despesas">
+                <thead>
+                  <tr><th scope="col">Competência</th><th scope="col">Receita Realizada (R$)</th><th scope="col">Despesa Paga (R$)</th><th scope="col">Balancete Contábil</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Maio/2026</td><td>845.230,00</td><td>790.150,00</td>
+                    <td><a href="#" class="link-acao" aria-label="Baixar balancete em PDF de Maio de 2026">📄 Ver Detalhes (PDF)</a></td>
+                  </tr>
+                  <tr>
+                    <td>Abril/2026</td><td>810.000,00</td><td>822.000,00</td>
+                    <td><a href="#" class="link-acao" aria-label="Baixar balancete em PDF de Abril de 2026">📄 Ver Detalhes (PDF)</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="aba-repasses" class="painel-conteudo animacao-suave" role="tabpanel">
+          <div class="cabecalho-painel">
+            <h2>Transferências, Repasses e Convênios</h2>
+            <span class="etiqueta etiqueta-info">Atualizado Diariamente</span>
+          </div>
+
+          <div class="bloco-dados">
+            <div class="titulo-bloco">1. Recursos do Governo Federal (SUS / Fundo Nacional de Saúde)</div>
+            <div class="tabela-responsiva">
+              <table aria-label="Recursos do Governo Federal">
+                <thead>
+                  <tr><th scope="col">Portaria / Bloco</th><th scope="col">Finalidade (Objeto)</th><th scope="col">Data do Crédito</th><th scope="col">Valor (R$)</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Portaria GM/MS 123/26</td><td>Teto MAC (Média e Alta Complexidade)</td><td>10/06/2026</td><td>R$ 150.000,00</td>
+                  </tr>
+                  <tr>
+                    <td>FNS - Bloco Custeio</td><td>Incentivo Leitos UTI</td><td>05/06/2026</td><td>R$ 80.000,00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bloco-dados">
+            <div class="titulo-bloco">2. Emendas Parlamentares (Impositivas e Individuais)</div>
+            <div class="tabela-responsiva">
+              <table aria-label="Emendas Parlamentares">
+                <thead>
+                  <tr><th scope="col">Autor / Deputado</th><th scope="col">Nº Emenda / Ano</th><th scope="col">Destinação Específica</th><th scope="col">Status</th><th scope="col">Valor Recebido</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Dep. Estadual João Silva</td><td>ED-1045/2025</td><td>Aquisição de Aparelho de Raio-X</td>
+                    <td><span class="etiqueta etiqueta-sucesso">Executada</span></td>
+                    <td>R$ 350.000,00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bloco-dados">
+            <div class="titulo-bloco">3. Subvenções da Prefeitura Municipal (Lima Duarte)</div>
+            <div class="tabela-responsiva">
+              <table aria-label="Subvenções da Prefeitura">
+                <thead>
+                  <tr><th scope="col">Termo de Fomento</th><th scope="col">Descrição / Uso do Recurso</th><th scope="col">Vigência</th><th scope="col">Valor Parcela Mês</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>T.F. 002/2026</td><td>Custeio do Pronto Atendimento 24 horas</td><td>Jan a Dez/26</td><td>R$ 120.000,00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="aba-licitacoes" class="painel-conteudo animacao-suave" role="tabpanel">
+          <div class="cabecalho-painel">
+            <h2>Processos Licitatórios e Compras Diretas</h2>
+          </div>
+
+          <form class="barra-filtros" aria-label="Filtros de Licitações">
+            <div class="grupo-filtro">
+              <label for="filtro-modalidade">Modalidade</label>
+              <select id="filtro-modalidade" class="campo-filtro">
+                <option>Todas</option>
+                <option>Pregão Eletrônico</option>
+                <option>Dispensa de Licitação</option>
+                <option>Inexigibilidade</option>
+              </select>
+            </div>
+            <div class="grupo-filtro">
+              <label for="filtro-status">Status</label>
+              <select id="filtro-status" class="campo-filtro">
+                <option>Todos</option>
+                <option>Em Andamento</option>
+                <option>Homologado/Adjudicado</option>
+              </select>
+            </div>
+            <div class="grupo-filtro">
+              <label for="filtro-busca">Busca por Objeto</label>
+              <input type="text" id="filtro-busca" class="campo-filtro" placeholder="Ex: Medicamentos, Limpeza...">
+            </div>
+            <button type="button" class="botao-filtrar">Pesquisar Processos</button>
+          </form>
+
+          <div class="bloco-dados">
+            <div class="tabela-responsiva">
+              <table aria-label="Tabela de Licitações">
+                <thead>
+                  <tr><th scope="col">Nº Processo / Modalidade</th><th scope="col">Objeto Licitado</th><th scope="col">Abertura</th><th scope="col">Situação</th><th scope="col">Valor Estimado</th><th scope="col">Ações</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>PE 045/2026</strong></td>
+                    <td>Aquisição de medicamentos de uso contínuo hospitalar</td>
+                    <td>15/05/2026</td>
+                    <td><span class="etiqueta etiqueta-sucesso">Homologado</span></td>
+                    <td>R$ 120.500,00</td>
+                    <td><a href="#" class="link-acao" aria-label="Ver edital do processo PE 045/2026">Ver Edital e Anexos</a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Dispensa 012/26</strong></td>
+                    <td>Contratação de empresa para manutenção do gerador</td>
+                    <td>01/06/2026</td>
+                    <td><span class="etiqueta etiqueta-alerta">Em Análise</span></td>
+                    <td>R$ 15.000,00</td>
+                    <td><a href="#" class="link-acao" aria-label="Ver termo da dispensa 012/26">Ver Termo</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="aba-rh" class="painel-conteudo animacao-suave" role="tabpanel">
+          <div class="cabecalho-painel">
+            <h2>Transparência de Recursos Humanos</h2>
+          </div>
+
+          <div class="bloco-dados">
+            <div class="titulo-bloco">Relação de Dirigentes e Conselho Médico</div>
+            <div class="tabela-responsiva">
+              <table aria-label="Relação de Dirigentes">
+                <thead>
+                  <tr><th scope="col">Nome do Profissional</th><th scope="col">Cargo / Função Diretiva</th><th scope="col">Ato de Nomeação</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Dr. Carlos Mendes</td><td>Diretor Clínico</td><td>Ata nº 45/2025</td></tr>
+                  <tr><td>João Silva Costa</td><td>Provedor / Administrador</td><td>Assembleia 2025</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bloco-dados">
+            <div class="titulo-bloco">Folha de Pagamento Sintética e Cargos</div>
+            <div class="tabela-responsiva">
+              <table aria-label="Cargos e salários base">
+                <thead>
+                  <tr><th scope="col">Categoria / Cargo</th><th scope="col">Quantidade de Servidores</th><th scope="col">Piso/Base Salarial (R$)</th><th scope="col">Vínculo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Enfermeiro(a) Padrão</td><td>8</td><td>4.750,00</td><td>CLT</td></tr>
+                  <tr><td>Técnico(a) de Enfermagem</td><td>24</td><td>3.325,00</td><td>CLT</td></tr>
+                  <tr><td>Médico(a) Plantonista</td><td>12</td><td>1.200,00 (Plantão)</td><td>Autônomo/PJ</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="aba-relatorios" class="painel-conteudo animacao-suave" role="tabpanel">
+          <div class="cabecalho-painel">
+            <h2>Relatórios Oficiais e Auditorias Independentes</h2>
+          </div>
+
+          <div class="grade-3">
+            <div class="cartao-noticia" style="padding: 2rem; text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 1rem;" aria-hidden="true">📑</div>
+              <h3 style="color: var(--vinho-principal);">Relatório Anual de Gestão (RAG)</h3>
+              <p style="color: var(--texto-suave); font-size: 0.9rem; margin-bottom: 1rem;">Prestação de contas do exercício 2025 submetida ao Conselho.</p>
+              <a href="#" class="botao-primario" style="padding: 0.5rem 1rem; font-size: 0.9rem;" aria-label="Baixar Relatório Anual de Gestão em PDF">Baixar Arquivo PDF</a>
+            </div>
+            
+            <div class="cartao-noticia" style="padding: 2rem; text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 1rem;" aria-hidden="true">🔍</div>
+              <h3 style="color: var(--vinho-principal);">Parecer de Auditoria Externa</h3>
+              <p style="color: var(--texto-suave); font-size: 0.9rem; margin-bottom: 1rem;">Documento emitido por empresa de auditoria independente.</p>
+              <a href="#" class="botao-primario" style="padding: 0.5rem 1rem; font-size: 0.9rem;" aria-label="Baixar Parecer de Auditoria em PDF">Baixar Arquivo PDF</a>
+            </div>
+
+            <div class="cartao-noticia" style="padding: 2rem; text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 1rem;" aria-hidden="true">📈</div>
+              <h3 style="color: var(--vinho-principal);">Metas do SUS (Contratualização)</h3>
+              <p style="color: var(--texto-suave); font-size: 0.9rem; margin-bottom: 1rem;">Acompanhamento dos indicadores exigidos pela Secretaria de Saúde.</p>
+              <a href="#" class="botao-primario" style="padding: 0.5rem 1rem; font-size: 0.9rem;" aria-label="Acessar planilha de metas do SUS">Acessar Planilha</a>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+
+  <script>
+    // 1. Controle de Acessibilidade (Fonte e Contraste)
+    let tamanhoAtualFonte = 16;
+    function alterarFonte(acao) {
+      if (acao === 'aumentar' && tamanhoAtualFonte < 24) {
+        tamanhoAtualFonte += 2;
+      } else if (acao === 'diminuir' && tamanhoAtualFonte > 12) {
+        tamanhoAtualFonte -= 2;
+      }
+      document.documentElement.style.fontSize = tamanhoAtualFonte + 'px';
+    }
+
+    function alternarContraste() {
+      document.body.classList.toggle('alto-contraste');
+    }
+
+    // 2. Controle do Menu Mobile
+    function alternarMenu() { 
+      const menu = document.getElementById('menu-navegacao');
+      const botao = document.querySelector('.botao-mobile');
+      menu.classList.toggle('aberto'); 
+      botao.setAttribute('aria-expanded', menu.classList.contains('aberto'));
+    }
+
+    // 3. Sistema SPA (Transição entre Views)
+    function trocarVisao(visao) {
+      const visaoSite = document.getElementById('visao-institucional');
+      const visaoTransp = document.getElementById('visao-transparencia');
+
+      if (visao === 'transparencia') {
+        visaoSite.style.display = 'none';
+        visaoTransp.style.display = 'block';
+        window.scrollTo(0, 0);
+      } else {
+        visaoTransp.style.display = 'none';
+        visaoSite.style.display = 'block';
+        window.scrollTo(0, 0);
+      }
+    }
+
+    // 4. Controle das Abas do Portal (com ARIA dinâmico)
+    function abrirAba(evento, nomeAba) {
+      let i, paineis, links;
+      
+      paineis = document.getElementsByClassName("painel-conteudo");
+      for (i = 0; i < paineis.length; i++) { 
+        paineis[i].style.display = "none"; 
+        paineis[i].classList.remove("ativo");
+      }
+      
+      links = document.getElementsByClassName("aba-link");
+      for (i = 0; i < links.length; i++) { 
+        links[i].classList.remove("ativo"); 
+        links[i].setAttribute('aria-selected', 'false');
+      }
+      
+      document.getElementById(nomeAba).style.display = "block";
+      document.getElementById(nomeAba).classList.add("ativo");
+      
+      if(evento) {
+        evento.currentTarget.classList.add("ativo");
+        evento.currentTarget.setAttribute('aria-selected', 'true');
+      }
+    }
+  </script>
+
+</body>
+</html>
