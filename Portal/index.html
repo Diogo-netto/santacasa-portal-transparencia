@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Portal da Transparência | Santa Casa</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+
+<div class="envoltorio-pagina">
+  
+  <!-- BARRA DE ACESSIBILIDADE -->
+  <div class="barra-acessibilidade" role="banner">
+    <div class="recipiente">
+      <button class="btn-acesso" onclick="alterarFonte('diminuir')">A-</button>
+      <button class="btn-acesso" onclick="alterarFonte('aumentar')">A+</button>
+      <button class="btn-acesso" onclick="alternarContraste()">Alto Contraste</button>
+    </div>
+  </div>
+
+  <div id="visao-transparencia" role="main" style="display: block;">
+    
+    <header class="cabecalho-transparencia">
+      <div class="recipiente cabecalho-conteiner">
+        <div class="logotipo">
+          <svg width="32" height="32" viewBox="0 0 50 50" fill="none">
+            <rect width="50" height="50" rx="8" fill="var(--vinho-principal)"/>
+            <path d="M15 25H35M15 15H35M15 35H25" stroke="var(--dourado-destaque)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          Portal da Transparência
+        </div>
+        <a href="../santa casa landing page/index.html" class="botao-voltar">← Voltar ao Site Institucional</a>
+      </div>
+    </header>
+
+    <div class="layout-transparencia">
+      
+      <aside class="barra-lateral-sistema">
+        <div class="cabecalho-barra">
+          <h3>Módulos Institucionais</h3>
+        </div>
+        <nav id="menu-transparencia" role="tablist">
+          <button class="aba-link ativo" onclick="abrirAba(event, 'aba-financas')" role="tab" aria-selected="true">📊 Orçamento e Finanças</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-repasses')" role="tab" aria-selected="false">🏦 Repasses e Convênios</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-contratos')" role="tab" aria-selected="false">🤝 Contratos e Aditivos</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-licitacoes')" role="tab" aria-selected="false">📜 Licitações e Compras</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-rh')" role="tab" aria-selected="false">👥 Recursos Humanos</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-diarias')" role="tab" aria-selected="false">✈️ Diárias e Passagens</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-relatorios')" role="tab" aria-selected="false">📁 Relatórios de Gestão</button>
+        </nav>
+      </aside>
+
+      <main>
+        
+        <!-- PAINEL 1: FINANÇAS -->
+        <div id="aba-financas" class="painel-conteudo ativo" role="tabpanel">
+          <div class="cabecalho-painel">
+            <h2>Execução Orçamentária e Financeira</h2>
+            <span class="etiqueta etiqueta-info">Exercício 2026</span>
+          </div>
+          
+          <form class="barra-filtros">
+            <div class="grupo-filtro">
+              <label>Ano Exercício</label>
+              <select class="campo-filtro"><option>2026</option><option>2025</option></select>
+            </div>
+            <div class="grupo-filtro">
+              <label>Mês Referência</label>
+              <select class="campo-filtro"><option>Todos os meses</option><option>Junho</option><option>Maio</option></select>
+            </div>
+            <div class="grupo-filtro">
+              <label>Tipo de Conta</label>
+              <select class="campo-filtro"><option>Todas</option><option>Custeio</option><option>Investimento</option></select>
+            </div>
+            <button type="button" class="botao-filtrar">Aplicar Filtros</button>
+          </form>
+
+          <div class="grade-resumo">
+            <div class="cartao-resumo">
+              <div class="titulo-resumo">ARRECADAÇÃO TOTAL REALIZADA</div>
+              <div class="valor-resumo" style="color: var(--sucesso-cor);">R$ 4.250.000,00</div>
+            </div>
+            <div class="cartao-resumo">
+              <div class="titulo-resumo">DESPESA TOTAL EMPENHADA</div>
+              <div class="valor-resumo">R$ 3.810.000,00</div>
+            </div>
+          </div>
+
+          <div class="bloco-dados">
+            <div class="titulo-bloco">Detalhamento de Receitas e Despesas (Mensal)</div>
+            <div class="tabela-responsiva">
+              <table>
+                <thead>
+                  <tr><th>Competência</th><th>Receita Realizada (R$)</th><th>Despesa Paga (R$)</th><th>Superávit/Déficit</th><th>Balancete Contábil</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Maio/2026</td><td>845.230,00</td><td>790.150,00</td><td><span class="etiqueta etiqueta-sucesso">+ 55.080,00</span></td><td><a href="#" class="link-acao">📄 Baixar PDF</a></td></tr>
+                  <tr><td>Abril/2026</td><td>810.000,00</td><td>822.000,00</td><td><span class="etiqueta etiqueta-info">- 12.000,00</span></td><td><a href="#" class="link-acao">📄 Baixar PDF</a></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAINEL 2: REPASSES -->
+        <div id="aba-repasses" class="painel-conteudo" role="tabpanel">
+          <div class="cabecalho-painel"><h2>Transferências, Repasses e Convênios</h2></div>
+          <div class="bloco-dados">
+            <div class="titulo-bloco">Recursos do Fundo Nacional de Saúde (FNS / SUS)</div>
+            <div class="tabela-responsiva">
+              <table>
+                <thead><tr><th>Portaria / Bloco</th><th>Finalidade (Objeto)</th><th>Data do Crédito</th><th>Valor (R$)</th></tr></thead>
+                <tbody>
+                  <tr><td>GM/MS 123/26</td><td>Teto MAC (Média e Alta Complexidade)</td><td>10/06/2026</td><td>R$ 150.000,00</td></tr>
+                  <tr><td>FNS - Bloco Custeio</td><td>Incentivo Leitos UTI</td><td>05/06/2026</td><td>R$ 80.000,00</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAINEL 3: CONTRATOS (NOVO) -->
+        <div id="aba-contratos" class="painel-conteudo" role="tabpanel">
+          <div class="cabecalho-painel"><h2>Contratos e Aditivos</h2></div>
+          <form class="barra-filtros">
+            <div class="grupo-filtro">
+              <label>Busca por Fornecedor</label>
+              <input type="text" class="campo-filtro" placeholder="Nome ou CNPJ">
+            </div>
+            <button type="button" class="botao-filtrar">Pesquisar</button>
+          </form>
+          <div class="bloco-dados">
+            <div class="tabela-responsiva">
+              <table>
+                <thead><tr><th>Nº Contrato</th><th>Fornecedor</th><th>Objeto</th><th>Vigência</th><th>Valor Global (R$)</th><th>Íntegra</th></tr></thead>
+                <tbody>
+                  <tr><td>015/2026</td><td>MedSul Distribuidora Ltda</td><td>Fornecimento de gases medicinais</td><td>31/12/2026</td><td>R$ 240.000,00</td><td><a href="#" class="link-acao">Visualizar</a></td></tr>
+                  <tr><td>008/2026</td><td>Clean Ambiental</td><td>Serviços de higienização hospitalar</td><td>31/12/2026</td><td>R$ 315.000,00</td><td><a href="#" class="link-acao">Visualizar</a></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAINEL 4: LICITAÇÕES -->
+        <div id="aba-licitacoes" class="painel-conteudo" role="tabpanel">
+          <div class="cabecalho-painel"><h2>Processos Licitatórios e Compras</h2></div>
+          <form class="barra-filtros">
+            <div class="grupo-filtro">
+              <label>Modalidade</label>
+              <select class="campo-filtro"><option>Todas</option><option>Pregão Eletrônico</option><option>Dispensa</option></select>
+            </div>
+            <div class="grupo-filtro">
+              <label>Busca de Objeto</label>
+              <input type="text" class="campo-filtro" placeholder="Ex: Equipamentos...">
+            </div>
+            <button type="button" class="botao-filtrar">Buscar</button>
+          </form>
+          <div class="bloco-dados">
+            <div class="tabela-responsiva">
+              <table>
+                <thead><tr><th>Processo / Modalidade</th><th>Objeto Licitado</th><th>Abertura</th><th>Situação</th><th>Valor Estimado</th><th>Edital</th></tr></thead>
+                <tbody>
+                  <tr><td>PE 045/2026</td><td>Aquisição de medicamentos contínuos</td><td>15/05/2026</td><td><span class="etiqueta etiqueta-sucesso">Homologado</span></td><td>R$ 120.500,00</td><td><a href="#" class="link-acao">Ver Anexos</a></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAINEL 5: RH -->
+        <div id="aba-rh" class="painel-conteudo" role="tabpanel">
+          <div class="cabecalho-painel"><h2>Recursos Humanos e Remuneração</h2></div>
+          <div class="bloco-dados">
+            <div class="titulo-bloco">Folha de Pagamento Sintética (Cargos e Salários Base)</div>
+            <div class="tabela-responsiva">
+              <table>
+                <thead><tr><th>Categoria / Cargo</th><th>Quantidade Servidores</th><th>Piso/Base Salarial (R$)</th><th>Vínculo</th></tr></thead>
+                <tbody>
+                  <tr><td>Enfermeiro(a) Padrão</td><td>8</td><td>R$ 4.750,00</td><td>CLT</td></tr>
+                  <tr><td>Técnico(a) de Enfermagem</td><td>24</td><td>R$ 3.325,00</td><td>CLT</td></tr>
+                  <tr><td>Médico(a) Plantonista</td><td>12</td><td>R$ 1.200,00 (Plantão)</td><td>Autônomo/PJ</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAINEL 6: DIÁRIAS (NOVO) -->
+        <div id="aba-diarias" class="painel-conteudo" role="tabpanel">
+          <div class="cabecalho-painel"><h2>Diárias e Passagens</h2></div>
+          <div class="bloco-dados">
+            <div class="titulo-bloco">Concessão de Diárias Institucionais</div>
+            <div class="tabela-responsiva">
+              <table>
+                <thead><tr><th>Beneficiário</th><th>Cargo/Função</th><th>Destino</th><th>Período</th><th>Motivo</th><th>Valor (R$)</th></tr></thead>
+                <tbody>
+                  <tr><td>João Silva Costa</td><td>Provedor</td><td>Belo Horizonte/MG</td><td>12 a 14/05/2026</td><td>Reunião Secretaria de Estado de Saúde</td><td>R$ 850,00</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAINEL 7: RELATÓRIOS -->
+        <div id="aba-relatorios" class="painel-conteudo" role="tabpanel">
+          <div class="cabecalho-painel"><h2>Relatórios de Gestão e Auditoria</h2></div>
+          <div class="grade-resumo">
+            <div class="cartao-resumo" style="text-align: center;">
+              <h3 style="color:var(--vinho-principal); margin-bottom: 10px;">Relatório Anual de Gestão (RAG)</h3>
+              <p style="font-size: 0.85rem; color: var(--texto-suave); margin-bottom: 15px;">Prestação de contas do exercício submetida ao conselho municipal.</p>
+              <a href="#" class="botao-filtrar" style="display:inline-block; text-decoration:none;">Baixar Documento PDF</a>
+            </div>
+            <div class="cartao-resumo" style="text-align: center;">
+              <h3 style="color:var(--vinho-principal); margin-bottom: 10px;">Parecer de Auditoria Externa</h3>
+              <p style="font-size: 0.85rem; color: var(--texto-suave); margin-bottom: 15px;">Documentação fiscal emitida por empresa de auditoria independente.</p>
+              <a href="#" class="botao-filtrar" style="display:inline-block; text-decoration:none;">Baixar Documento PDF</a>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="./portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Portal Institucional e da Transparência da Santa Casa de Misericórdia de Lima Duarte. Acompanhe nossos serviços de saúde, corpo clínico e gestão financeira.">
+  <meta name="keywords" content="Santa Casa, Lima Duarte, Saúde, Hospital, Transparência, Corpo Clínico, SUS, Atendimento Médico, Doação, PIX">
+  <meta name="author" content="AstroByte Tech Innovation">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Santa Casa de Lima Duarte | Institucional e Transparência">
+  <meta property="og:description" content="Saúde com Humanidade. Conheça nossos serviços, nosso corpo clínico e o Portal da Transparência.">
+  <meta property="og:image" content="../img/Captura de tela 2026-06-03 203616.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+
+  <title>Santa Casa de Lima Duarte | Institucional</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <div class="barra-acessibilidade" role="banner">
+    <div class="recipiente">
+      <button class="btn-acesso" onclick="alterarFonte('diminuir')" aria-label="Diminuir tamanho da fonte">A-</button>
+      <button class="btn-acesso" onclick="alterarFonte('aumentar')" aria-label="Aumentar tamanho da fonte">A+</button>
+      <button class="btn-acesso" onclick="alternarContraste()" aria-label="Ativar modo de Alto Contraste">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/></svg> Alto Contraste
+      </button>
+    </div>
+  </div>
+
+  <div id="visao-institucional" role="main">
+    
+    <header class="cabecalho-site">
+      <div class="recipiente cabecalho-conteiner">
+        <a href="#home" class="logotipo" aria-label="Página inicial Santa Casa de Lima Duarte">
+          <svg width="40" height="40" viewBox="0 0 50 50" fill="none" aria-hidden="true">
+            <rect width="50" height="50" rx="8" fill="var(--branco)"/>
+            <path d="M25 15V35M15 25H35" stroke="var(--dourado-destaque)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          Santa Casa de Lima Duarte
+        </a>
+        
+        <button class="botao-mobile" onclick="alternarMenuMobile()" aria-label="Abrir menu de navegação" aria-expanded="false">☰</button>
+        
+        <nav class="nav-primaria" id="menu-navegacao" role="navigation" aria-label="Menu principal">
+          <ul class="menu-principal">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#historia">História</a></li>
+            <li><a href="#noticias">Notícias</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#corpo-clinico">Corpo Clínico</a></li>
+            
+            <li class="menu-dropdown">
+              <a href="javascript:void(0);" onclick="alternarSubmenuMobile(event)" aria-haspopup="true" aria-expanded="false">Doações ⌄</a>
+              <div class="conteudo-dropdown" role="menu">
+                <a href="#doacoes" role="menuitem">Como doar? (PIX)</a>
+              </div>
+            </li>
+            
+            <li><a href="../Portal/index.html" class="botao-transparencia" aria-label="Acessar o Portal da Transparência">📊 Portal da Transparência</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero-banner" aria-labelledby="titulo-hero">
+        <div class="recipiente">
+          <h1 id="titulo-hero">Saúde com Humanidade</h1>
+          <p>A Santa Casa de Misericórdia de Lima Duarte está comprometida em oferecer atendimento de qualidade, ético e humanizado para toda a comunidade.</p>
+          <a href="#servicos" class="botao-primario">Conheça nossos serviços</a>
+        </div>
+      </section>
+
+      <section id="historia" class="secao-espacamento" aria-labelledby="titulo-historia">
+        <div class="recipiente grade-2">
+          <div>
+            <h2 id="titulo-historia">Conheça a nossa história</h2>
+            <p style="margin-bottom: 1rem; color: var(--texto-suave); font-size: 1.1rem; line-height: 1.8;">Fundada há décadas pelo esforço conjunto da comunidade e de benfeitores, a Santa Casa de Lima Duarte nasceu com a missão de amparar os mais necessitados.</p>
+            <p style="color: var(--texto-suave); font-size: 1.1rem; line-height: 1.8;">Hoje, somos referência regional em saúde, unindo a tradição do cuidado acolhedor com a modernização de nossos equipamentos e instalações.</p>
+          </div>
+          <div>
+            <img src="../img/Captura de tela 2026-06-03 203616.png" alt="Foto da fachada do hospital Santa Casa de Lima Duarte" class="imagem-historia">
+          </div>
+        </div>
+      </section>
+
+      <section id="noticias" class="secao-espacamento secao-fundo-alt" aria-labelledby="titulo-noticias">
+        <div class="recipiente">
+          <div class="titulo-secao">
+            <h2 id="titulo-noticias">Últimas Notícias</h2>
+            <p>Acompanhe as novidades, campanhas e melhorias da nossa instituição.</p>
+          </div>
+          <div class="grade-3">
+            <article class="cartao-noticia">
+              <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=600&auto=format&fit=crop" class="img-noticia" alt="Novos equipamentos médicos">
+              <div class="conteudo-noticia">
+                <span class="data-noticia">15 de Junho, 2026</span>
+                <h3 class="titulo-noticia">Novos equipamentos de Raio-X entram em operação</h3>
+                <p>Graças a emendas parlamentares, modernizamos nosso setor de imagem para diagnósticos mais rápidos.</p>
+              </div>
+            </article>
+            <article class="cartao-noticia">
+              <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=600&auto=format&fit=crop" class="img-noticia" alt="Bolsa de sangue">
+              <div class="conteudo-noticia">
+                <span class="data-noticia">02 de Junho, 2026</span>
+                <h3 class="titulo-noticia">Campanha de Doação de Sangue bate recorde</h3>
+                <p>A comunidade compareceu em peso e conseguimos abastecer nosso banco de sangue para o inverno.</p>
+              </div>
+            </article>
+            <article class="cartao-noticia">
+              <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=600&auto=format&fit=crop" class="img-noticia" alt="Médicos no corredor">
+              <div class="conteudo-noticia">
+                <span class="data-noticia">28 de Maio, 2026</span>
+                <h3 class="titulo-noticia">Ampliação do corpo clínico no Pronto Atendimento</h3>
+                <p>Visando diminuir o tempo de espera, dois novos plantonistas foram integrados à equipe diurna.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="servicos" class="secao-espacamento" aria-labelledby="titulo-servicos">
+        <div class="recipiente">
+          <div class="titulo-secao">
+            <h2 id="titulo-servicos">Informações e Serviços</h2>
+            <p>Conheça nossas especialidades e orientações para atendimento.</p>
+          </div>
+          <div class="grade-servicos">
+            <div class="coluna-servico">
+              <h3>Especialidades Médicas</h3>
+              <ul>
+                <li>Ginecologia</li>
+                <li>Ortopedia</li>
+                <li>Anestesiologia</li>
+                <li>Dermatologia</li>
+                <li>Urologia</li>
+                <li>Traumatologia</li>
+                <li>Cirurgia Geral</li>
+              </ul>
+            </div>
+            <div class="coluna-servico">
+              <h3>Exames e Diagnósticos</h3>
+              <ul>
+                <li>Ultrassonografia</li>
+                <li>Raio-X Digital</li>
+                <li>Exames Laboratoriais</li>
+              </ul>
+            </div>
+            <div class="coluna-servico">
+              <h3>Internações e Cirurgias</h3>
+              <ul>
+                <li>Cirurgia Geral</li>
+                <li>Cirurgia Ginecológica</li>
+                <li>Cirurgia Ortopédica (Joelho)</li>
+                <li>Cirurgia Dermatológica</li>
+              </ul>
+            </div>
+            <div class="coluna-servico">
+              <h3>Orientações Pacientes</h3>
+              <ul>
+                <li>Internação feita previamente.</li>
+                <li>Trazer RG, CPF e Cartão SUS.</li>
+                <li>Visitas Diurnas: 14h às 16h (Máx 4).</li>
+                <li>Visitas Noturnas: 20h às 21h (Máx 2).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="corpo-clinico" class="secao-espacamento secao-fundo-alt" aria-labelledby="titulo-equipe">
+        <div class="recipiente">
+          <div class="titulo-secao">
+            <h2 id="titulo-equipe">Corpo Clínico</h2>
+            <p>Conheça os profissionais de saúde dedicados ao seu bem-estar e cuidado contínuo.</p>
+          </div>
+          <div class="grade-4">
+            <article class="cartao-medico">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80" alt="Retrato do Dr. Carlos Mendes" class="foto-medico">
+              <div class="info-medico">
+                <h3>Dr. Carlos Mendes</h3>
+                <p>Cirurgia Geral</p>
+                <span class="crm-medico">CRM-MG 12345</span>
+              </div>
+            </article>
+            <article class="cartao-medico">
+              <img src="https://images.unsplash.com/photo-1594824406967-1a116df56157?auto=format&fit=crop&w=400&q=80" alt="Retrato da Dra. Ana Silveira" class="foto-medico">
+              <div class="info-medico">
+                <h3>Dra. Ana Silveira</h3>
+                <p>Ginecologia e Obstetrícia</p>
+                <span class="crm-medico">CRM-MG 54321</span>
+              </div>
+            </article>
+            <article class="cartao-medico">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80" alt="Retrato do Dr. Roberto Nunes" class="foto-medico">
+              <div class="info-medico">
+                <h3>Dr. Roberto Nunes</h3>
+                <p>Ortopedia e Traumatologia</p>
+                <span class="crm-medico">CRM-MG 98765</span>
+              </div>
+            </article>
+            <article class="cartao-medico">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80" alt="Retrato da Dra. Mariana Costa" class="foto-medico">
+              <div class="info-medico">
+                <h3>Dra. Mariana Costa</h3>
+                <p>Dermatologia</p>
+                <span class="crm-medico">CRM-MG 45678</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="doacoes" class="secao-espacamento" aria-labelledby="titulo-doacoes">
+        <div class="recipiente grade-2">
+          <div>
+            <h2 id="titulo-doacoes">Ajude a salvar vidas</h2>
+            <p style="font-size: 1.1rem; color: var(--texto-suave); margin-bottom: 1.5rem;">Sua doação é fundamental para mantermos o atendimento gratuito a quem mais precisa. Os recursos são investidos em insumos, medicamentos e manutenção estrutural.</p>
+            <ul class="lista-doacao">
+              <li>✅ <strong>Transparência total:</strong> Acompanhe as contas no portal.</li>
+              <li>✅ <strong>Impacto local:</strong> O dinheiro fica na sua cidade.</li>
+            </ul>
+          </div>
+          <div class="caixa-doacao" aria-labelledby="titulo-pix">
+            <h3 id="titulo-pix">Faça sua doação via PIX</h3>
+            <p>Chave CNPJ da Santa Casa:</p>
+            <div class="chave-pix" aria-label="Chave PIX CNPJ">21.432.555/0001-99</div>
+            <p class="detalhes-banco">Banco do Brasil - Agência 1234-5<br>Titular: Irmandade da Santa Casa de LD</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape" role="contentinfo">
+      <div class="recipiente grade-rodape">
+        <div class="secao-rodape">
+          <h4>Santa Casa</h4>
+          <p>Compromisso com a saúde e bem-estar da população de Lima Duarte e região.</p>
+        </div>
+        <div class="secao-rodape" role="navigation" aria-label="Links rápidos">
+          <h4>Acesso Rápido</h4>
+          <a href="#historia">Nossa História</a>
+          <a href="#corpo-clinico">Corpo Clínico</a>
+          <a href="../portal/index.html">Transparência Pública</a>
+        </div>
+        <div class="secao-rodape">
+          <h4>Contato</h4>
+          <p>Portaria: (32) 3281-1222</p>
+          <p>Administração: (32) 3281-1410</p>
+          <p>CEP: 36140-000 - Lima Duarte, MG</p>
+        </div>
+      </div>
+      <div class="direitos-rodape">
+        <p>&copy; 2026 Santa Casa de Misericórdia de Lima Duarte. Todos os direitos reservados. Design por AstroByte Tech.</p>
+      </div>
+    </footer>
+  </div>
+</div> <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
