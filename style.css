@@ -87,7 +87,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* HERO */
 .hero-banner { 
-  background-image: linear-gradient(rgba(196, 195, 195, 0.295), rgba(228, 228, 228, 0.486)), url('../img/Captura\ de\ tela\ 2026-06-03\ 203616.png');
+  background-image: linear-gradient(rgba(196, 195, 195, 0.295), rgba(228, 228, 228, 0.486)), url('img/fachada-hospital.png');
   background-size: cover;
   background-position: center;
   color: #000000; 
@@ -97,7 +97,7 @@ img { max-width: 100%; height: auto; display: block; }
   width: 100%;
 }
 body.alto-contraste .hero-banner { 
-  background-image: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.98)), url('../img/Captura\ de\ tela\ 2026-06-03\ 203616.png'); 
+  background-image: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.98)), url('img/fachada-hospital.png'); 
 }
 .hero-banner h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.1; word-wrap: break-word; color: #000000; }
 .hero-banner p { font-size: 1.3rem; margin-bottom: 2.5rem; color: #000000; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 1rem; font-weight: 600;}
