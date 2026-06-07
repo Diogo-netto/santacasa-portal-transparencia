@@ -1,218 +1,194 @@
 /* =========================================================================
-   SCRIPTS ESPECÍFICOS DO PORTAL (TRANSPARÊNCIA E SISTEMA)
+   SISTEMA JAVASCRIPT DO PORTAL DA TRANSPARÊNCIA (SANTA CASA)
+   Desenvolvido com foco em Acessibilidade (LBI), Performance e Escalabilidade.
    ========================================================================= */
 
+/* 
+   BLOCO 1: ISOLAMENTO DE ESCOPO (IIFE - Immediately Invoked Function Expression)
+   O QUE FAZ: Envelopa todo o código dentro de uma função anônima que se autoexecuta.
+   PRA QUE SERVE: Evita que as variáveis deste arquivo (como 'tamanhoAtualFonte') 
+   entrem em conflito com scripts da Landing Page ou de futuras bibliotecas que o 
+   Back-end possa instalar. É uma prática de segurança e organização nível Sênior.
+*/
 (function() {
-  // Variável para controlar o tamanho da fonte
+  
+  // Variável de controle do tamanho da fonte (Inicia no padrão de 16 pixels)
   let tamanhoAtualFonte = 16; 
 
-  /**
-   * Altera o tamanho da fonte do documento para melhorar a acessibilidade.
-   * @param {string} acao - Ação a ser executada: 'aumentar' ou 'diminuir'.
-   */
+  /* -------------------------------------------------------------------------
+     BLOCO 2: CONTROLE DE ACESSIBILIDADE - TAMANHO DA FONTE
+     O QUE FAZ: Aumenta ou diminui a fonte raiz (html) do site inteiro.
+     PRA QUE SERVE: Cumprir requisitos do Ministério Público e LBI para deficientes visuais.
+  ------------------------------------------------------------------------- */
   function ajustarTamanhoFonte(acao) {
     const elementoRaiz = document.documentElement;
-    const tamanhoMinimo = 12; // Tamanho mínimo da fonte em pixels
-    const tamanhoMaximo = 24; // Tamanho máximo da fonte em pixels
-    const passo = 2;          // Incremento/decremento do tamanho da fonte
+    const tamanhoMinimo = 12; // Trava de segurança: impede que a fonte fique microscópica
+    const tamanhoMaximo = 24; // Trava de segurança: impede que a fonte quebre as tabelas
+    const passo = 2;          // Aumenta ou diminui de 2 em 2 pixels para transição suave
 
+    // Lógica condicional: Só aumenta/diminui se estiver dentro do limite de segurança
     if (acao === 'aumentar' && tamanhoAtualFonte < tamanhoMaximo) {
       tamanhoAtualFonte += passo;
     } else if (acao === 'diminuir' && tamanhoAtualFonte > tamanhoMinimo) {
       tamanhoAtualFonte -= passo;
     }
     
+    // Aplica a alteração injetando CSS direto na tag <html>
     elementoRaiz.style.fontSize = `${tamanhoAtualFonte}px`;
-    // Salvar preferência do usuário em localStorage para persistência
+    
+    // Salva a escolha na memória do navegador (LocalStorage). 
+    // Assim, se o usuário for para outra aba ou apertar F5, a fonte não reseta.
     localStorage.setItem('portalTamanhoFonte', tamanhoAtualFonte);
   }
 
-  /**
-   * Alterna o modo de alto contraste do portal.
-   */
+  /* -------------------------------------------------------------------------
+     BLOCO 3: CONTROLE DE ACESSIBILIDADE - ALTO CONTRASTE
+     O QUE FAZ: Alterna a classe 'alto-contraste' no <body> da página.
+     PRA QUE SERVE: O CSS detecta essa classe e troca as cores do hospital 
+     (Vinho) por Preto, Branco e Amarelo, ajudando daltônicos e pessoas com baixa visão.
+  ------------------------------------------------------------------------- */
   function alternarContraste() {
+    // A função 'toggle' liga a classe se estiver desligada, e desliga se estiver ligada
     document.body.classList.toggle('alto-contraste');
     
-    // Salvar preferência do usuário em localStorage para persistência
+    // Salva o estado atual (true ou false) na memória do navegador
     const altoContrasteAtivo = document.body.classList.contains('alto-contraste');
     localStorage.setItem('portalAltoContraste', altoContrasteAtivo);
   }
 
-  /**
-   * Abre uma aba específica no portal e gerencia os estados de acessibilidade (ARIA).
-   * @param {Event} evento - O evento de clique que disparou a função.
-   * @param {string} nomeAba - O ID da aba a ser aberta.
-   */
+  /* -------------------------------------------------------------------------
+     BLOCO 4: MOTOR DE NAVEGAÇÃO DO SISTEMA (ABAS / DASHBOARD)
+     O QUE FAZ: Gerencia qual painel de dados aparece na tela.
+     PRA QUE SERVE: Evita recarregar a página a cada clique, criando uma 
+     experiência de aplicativo moderno (Single Page Application simulada).
+  ------------------------------------------------------------------------- */
   function abrirAba(evento, nomeAba) {
-    // Esconde todos os painéis de conteúdo
+    // PASSO A: Esconde todos os painéis e avisa aos leitores de tela (cegos) que eles sumiram
     const paineisConteudo = document.querySelectorAll('.painel-conteudo');
     paineisConteudo.forEach(painel => {
       painel.classList.remove('ativo');
-      painel.setAttribute('aria-hidden', 'true');
+      painel.setAttribute('aria-hidden', 'true'); // Etiqueta de Acessibilidade
     });
 
-    // Remove a classe 'ativo' de todos os links de aba
+    // PASSO B: Tira o estilo de "clicado" (Dourado) de todos os botões do menu lateral
     const linksAbas = document.querySelectorAll('.aba-link');
     linksAbas.forEach(link => {
       link.classList.remove('ativo');
-      link.setAttribute('aria-selected', 'false');
-      link.setAttribute('tabindex', '-1'); // Torna abas inativas não focáveis via tab
+      link.setAttribute('aria-selected', 'false'); // Etiqueta de Acessibilidade
+      link.setAttribute('tabindex', '-1');         // Tira do foco do teclado (Tab)
     });
 
-    // Mostra o painel de conteúdo correto
+    // PASSO C: Mostra o painel correto que o usuário pediu
     const painelAlvo = document.getElementById(nomeAba);
     if (painelAlvo) {
       painelAlvo.classList.add('ativo');
-      painelAlvo.setAttribute('aria-hidden', 'false');
+      painelAlvo.setAttribute('aria-hidden', 'false'); // Avisa o leitor de tela que este está visível
     }
 
-    // Ativa o link da aba clicada
+    // PASSO D: Pinta o botão clicado de Dourado para o usuário saber onde está
     if (evento && evento.currentTarget) {
       const abaAtual = evento.currentTarget;
       abaAtual.classList.add('ativo');
       abaAtual.setAttribute('aria-selected', 'true');
-      abaAtual.setAttribute('tabindex', '0'); // Torna a aba ativa focável
+      abaAtual.setAttribute('tabindex', '0'); // Permite focar com a tecla Tab
     }
     
-    // Salvar a aba ativa para persistência
+    // PASSO E: Salva a aba atual para manter o usuário nela se ele recarregar a página (F5)
     localStorage.setItem('abaAtiva', nomeAba);
   }
 
-  /**
-   * Gerencia os filtros e aplica a filtragem de dados.
-   * @param {Event} evento - O evento de clique do botão de filtro.
-   */
+  /* -------------------------------------------------------------------------
+     BLOCO 5: MANIPULADOR DO BOTÃO DE FILTROS (MOCKUP PARA O BACK-END)
+     O QUE FAZ: Prepara o terreno para quando o Banco de Dados for conectado.
+     PRA QUE SERVE: Impede que a página pisque ao clicar em "Aplicar Filtros" e 
+     mostra um feedback visual de carregamento.
+  ------------------------------------------------------------------------- */
   function aplicarFiltros(evento) {
-    evento.preventDefault();
+    // Trava o comportamento natural do HTML que tenta enviar formulários recarregando a tela
+    evento.preventDefault(); 
     
-    // Encontra o formulário de filtros mais próximo
-    const formulario = evento.target.closest('.barra-filtros');
-    if (!formulario) return;
-
-    // Obtém os valores dos filtros
-    const filtros = {
-      ano: formulario.querySelector('select:nth-of-type(1)')?.value || 'Todos',
-      mes: formulario.querySelector('select:nth-of-type(2)')?.value || 'Todos'
-    };
-
-    console.log('Filtros aplicados:', filtros);
-
-    // Feedback visual temporário de filtragem
+    // Captura o botão que foi clicado
     const botao = evento.target;
+    
+    // Salva o texto original ("Aplicar Filtros")
     const textoOriginal = botao.textContent;
+    
+    // Muda visualmente para mostrar que o sistema está trabalhando
     botao.textContent = "Filtrando...";
     botao.style.opacity = "0.7";
     
+    // Simula um delay de servidor (meio segundo) e depois volta ao normal.
+    // *Nota para o Back-end:* Aqui entrará a chamada API (fetch/axios) para buscar os dados.
     setTimeout(() => {
         botao.textContent = textoOriginal;
         botao.style.opacity = "1";
     }, 500);
   }
 
-  /**
-   * Gerencia o envio do formulário de ouvidoria (caso adicionado futuramente).
-   * @param {Event} evento - O evento de submit do formulário.
-   */
-  function lidarEnvioOuvidoria(evento) {
-    evento.preventDefault();
-
-    const formulario = evento.target;
-    const nome = formulario.querySelector('#nome-ouvidoria')?.value;
-    const email = formulario.querySelector('#email-ouvidoria')?.value;
-    const assunto = formulario.querySelector('#assunto-ouvidoria')?.value;
-    const mensagem = formulario.querySelector('#mensagem-ouvidoria')?.value;
-
-    if (!nome || !email || !assunto || !mensagem) {
-      alert('Por favor, preencha todos os campos do formulário.');
-      return;
-    }
-
-    console.log('Mensagem de Ouvidoria:', { nome, email, assunto, mensagem });
-    alert('Sua mensagem foi enviada com sucesso! Obrigado por entrar em contato.');
-    
-    formulario.reset();
-  }
-
-  /**
-   * Inicializa as funcionalidades do portal ao carregar o DOM.
-   */
+  /* -------------------------------------------------------------------------
+     BLOCO 6: INICIALIZAÇÃO DO SISTEMA (BOOT)
+     O QUE FAZ: Roda toda vez que a página é acessada para carregar as memórias salvas.
+     PRA QUE SERVE: Manter a cor, a fonte e a aba que o usuário estava usando.
+  ------------------------------------------------------------------------- */
   function inicializarPortal() {
-    // Restaurar preferências de acessibilidade do localStorage
+    // 1. Restaura Fonte
     const fonteSalva = localStorage.getItem('portalTamanhoFonte');
     if (fonteSalva) {
       tamanhoAtualFonte = parseInt(fonteSalva, 10);
       document.documentElement.style.fontSize = `${tamanhoAtualFonte}px`;
     }
 
+    // 2. Restaura Alto Contraste
     const contrasteSalvo = localStorage.getItem('portalAltoContraste');
     if (contrasteSalvo === 'true') {
       document.body.classList.add('alto-contraste');
     }
 
-    // Adicionar event listeners limpos para os botões de acessibilidade
-    const btnDiminuirFonte = document.querySelector('.btn-acesso[onclick*="diminuir"]');
-    if (btnDiminuirFonte) {
-      btnDiminuirFonte.removeAttribute('onclick');
-      btnDiminuirFonte.addEventListener('click', () => ajustarTamanhoFonte('diminuir'));
-    }
-
-    const btnAumentarFonte = document.querySelector('.btn-acesso[onclick*="aumentar"]');
-    if (btnAumentarFonte) {
-      btnAumentarFonte.removeAttribute('onclick');
-      btnAumentarFonte.addEventListener('click', () => ajustarTamanhoFonte('aumentar'));
-    }
-
-    const btnAlternarContraste = document.querySelector('.btn-acesso[onclick*="alternarContraste"]');
-    if (btnAlternarContraste) {
-      btnAlternarContraste.removeAttribute('onclick');
-      btnAlternarContraste.addEventListener('click', alternarContraste);
-    }
-
-    // Processamento das abas para remover o onclick em linha e usar addEventListener
+    // 3. Limpeza de HTML sujo: Remove o 'onclick' escrito no HTML e adiciona pelo JS.
+    // Isso deixa o código mais seguro e rápido.
     const linksAbas = document.querySelectorAll('.aba-link');
     linksAbas.forEach(link => {
       const atributoOnclick = link.getAttribute('onclick');
       if (atributoOnclick) {
-        // Captura o nome da aba enviada na função
+        // Usa Expressão Regular (Regex) para "pescar" o nome da aba dentro do onclick
         const correspondencia = atributoOnclick.match(/abrirAba\(event,\s*\'(.*?)\'\)/);
         if (correspondencia) {
           const nomeAba = correspondencia[1];
           link.removeAttribute('onclick');
+          // Adiciona o ouvinte de clique nativo do JavaScript
           link.addEventListener('click', (evento) => abrirAba(evento, nomeAba));
         }
       }
     });
 
-    // Restaurar aba ativa do LocalStorage (ou abrir a primeira por padrão)
+    // 4. Restaura a Aba que estava aberta antes do F5
     const abaInicial = localStorage.getItem('abaAtiva');
     if (abaInicial) {
+        // Procura a aba salva ou faz um fallback buscando pelo nome
         const linkAbaSalva = document.querySelector(`.aba-link[onclick*="${abaInicial}"]`) || 
                              Array.from(linksAbas).find(aba => aba.textContent.toLowerCase().includes(abaInicial.split('-')[1]));
         if (linkAbaSalva) {
-            linkAbaSalva.click();
+            linkAbaSalva.click(); // Força um clique virtual para abrir a aba
         }
     } else if (linksAbas.length > 0) {
-        linksAbas[0].click(); // Abre Finanças como fallback padrão
+        // Se for o primeiro acesso da vida do usuário, abre a aba de Finanças por padrão
+        linksAbas[0].click(); 
     }
 
-    // Adicionar funcionalidade para os botões de filtro
+    // 5. Liga a função de simular filtro nos botões de pesquisa das tabelas
     const botoesFiltro = document.querySelectorAll('.botao-filtrar');
     botoesFiltro.forEach(botao => {
+      // Confirma se o botão realmente pertence a um formulário de filtros
       if (botao.closest('.barra-filtros')) {
         botao.addEventListener('click', aplicarFiltros);
       }
     });
 
-    // Ouvidoria
-    const formularioOuvidoria = document.querySelector('.formulario-ouvidoria');
-    if (formularioOuvidoria) {
-      formularioOuvidoria.addEventListener('submit', lidarEnvioOuvidoria);
-    }
-
-    // Suporte para navegação por teclado (Setas direcionais entre abas)
+    // 6. Navegação de teclado avançada: Permite usar as setas (cima/baixo) para trocar de aba
     linksAbas.forEach((link, indice) => {
       link.addEventListener('keydown', (evento) => {
         let proximoIndice = indice;
+        
         if (evento.key === 'ArrowDown' || evento.key === 'ArrowRight') {
           proximoIndice = (indice + 1) % linksAbas.length;
           evento.preventDefault();
@@ -220,21 +196,28 @@
           proximoIndice = (indice - 1 + linksAbas.length) % linksAbas.length;
           evento.preventDefault();
         }
+        
         if (proximoIndice !== indice) {
-          linksAbas[proximoIndice].focus();
-          linksAbas[proximoIndice].click();
+          linksAbas[proximoIndice].focus(); // Move o contorno amarelo
+          linksAbas[proximoIndice].click(); // Abre o painel correspondente
         }
       });
     });
   }
 
-  // Executa a inicialização quando o DOM estiver completamente carregado
+  /* -------------------------------------------------------------------------
+     BLOCO 7: GATILHO DE LARGADA E EXPOSIÇÃO GLOBAL
+     O QUE FAZ: Diz ao navegador quando rodar a inicialização.
+  ------------------------------------------------------------------------- */
+  // Ouve o evento 'DOMContentLoaded', que significa: "O HTML inteiro já foi carregado e renderizado"
   document.addEventListener('DOMContentLoaded', inicializarPortal);
 
-  // Expor funções essenciais globalmente para evitar bugs caso HTML carregue fora de ordem
+  // Expõe as funções essenciais para a "Janela" (Window) do navegador.
+  // Isso impede que os botões de acessibilidade lá no topo do HTML quebrem.
   window.alterarFonte = function(acao) {
     ajustarTamanhoFonte(acao === 'aumentar' ? 'aumentar' : 'diminuir');
   };
   window.alternarContraste = alternarContraste;
   window.abrirAba = abrirAba;
+
 })();

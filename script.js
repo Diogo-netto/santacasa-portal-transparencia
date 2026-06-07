@@ -35,3 +35,48 @@ function alternarSubmenuMobile(evento) {
     dropdown.classList.toggle('mostrar-mobile');
   }
 }
+
+
+
+/* =========================================================================
+   ANIMAÇÃO: CONTADOR DE ESTATÍSTICAS
+   Faz os números subirem gradativamente quando o usuário rola a página
+   ========================================================================= */
+
+function animarContadores() {
+  const contadores = document.querySelectorAll('.numero-contador');
+  const velocidade = 200; // Quanto menor, mais rápido conta
+
+  // Usamos o IntersectionObserver para saber quando a seção aparece na tela
+  const observador = new IntersectionObserver((entradas, observadorProprio) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        // O elemento apareceu na tela, começa a contar
+        const elemento = entrada.target;
+        const alvo = +elemento.getAttribute('data-alvo');
+        
+        const atualizarContador = () => {
+          const valorAtual = +elemento.innerText;
+          const incremento = alvo / velocidade;
+
+          if (valorAtual < alvo) {
+            elemento.innerText = Math.ceil(valorAtual + incremento);
+            setTimeout(atualizarContador, 10);
+          } else {
+            elemento.innerText = alvo; // Garante que termine no número exato
+          }
+        };
+
+        atualizarContador();
+        observadorProprio.unobserve(elemento); // Para de observar depois que contou uma vez
+      }
+    });
+  }, { threshold: 0.5 }); // Só ativa quando 50% da seção estiver visível
+
+  contadores.forEach(contador => {
+    observador.observe(contador);
+  });
+}
+
+// Inicia a animação quando o HTML carregar
+document.addEventListener('DOMContentLoaded', animarContadores);
