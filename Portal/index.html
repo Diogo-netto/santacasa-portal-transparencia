@@ -1,136 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- =========================================================================
-       BLOCO 1: CONFIGURAÇÕES ESSENCIAIS E RESPONSIVIDADE (MOBILE FIRST)
-       ========================================================================= -->
   <meta charset="UTF-8">
-  
-  <!-- Configuração vital para o layout não quebrar no celular e desativar zoom acidental (user-scalable=no) que estraga a experiência em botões de sistema -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
-  <!-- Força o navegador da Microsoft a usar o motor mais recente (evita bugs no Edge) -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-  <!-- Define a cor da barra de status do navegador no celular (Android) combinando com o vinho do hospital -->
   <meta name="theme-color" content="#5c0618">
-
-  <!-- =========================================================================
-       BLOCO 2: SEO E INDEXAÇÃO (Google)
-       ========================================================================= -->
-  <meta name="description" content="Portal da Transparência da Santa Casa de Lima Duarte. Acompanhe a gestão financeira, contratos, licitações, repasses do SUS e recursos humanos.">
-  <meta name="keywords" content="Portal da Transparência, Santa Casa, Lima Duarte, Finanças, Contratos, SUS, Licitações, Gestão Pública, Hospital">
-  <meta name="author" content="AstroByte Tech Innovation">
-  <meta name="robots" content="index, follow"> <!-- Diz ao Google para ler e mostrar esta página nas buscas -->
-
-  <!-- =========================================================================
-       BLOCO 3: OPEN GRAPH (Para ficar bonito ao compartilhar no WhatsApp/Redes Sociais)
-       ========================================================================= -->
-  <meta property="og:title" content="Portal da Transparência | Santa Casa de Lima Duarte">
-  <meta property="og:description" content="Acesse as contas públicas, licitações e repasses da Santa Casa. Transparência e respeito com a verba da saúde.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:image" content="../img/fachada-hospital.png"> <!-- Puxa a imagem raiz ajustada -->
-
+  <meta name="description" content="Portal da Transparência da Santa Casa de Lima Duarte.">
   <title>Portal da Transparência | Santa Casa</title>
   
-  <!-- =========================================================================
-       BLOCO 4: IMPORTAÇÃO DE FONTES E ESTILOS
-       ========================================================================= -->
-  <!-- Pré-conecta com o Google Fonts para carregar a fonte 'Inter' mais rápido -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Folha de estilo isolada para não dar conflito com a Vitrine (Landing Page) -->
   <link rel="stylesheet" href="portal.css">
 </head>
 <body>
 
-<!-- Envoltório mestre: trava vazamentos horizontais de CSS (overflow) -->
 <div class="envoltorio-pagina">
   
-  <!-- =========================================================================
-       BLOCO 5: BARRA DE ACESSIBILIDADE (LBI)
-       Exigência legal para sites públicos e de saúde. Controlada pelo portal.js
-       ========================================================================= -->
-  <div class="barra-acessibilidade" role="banner" aria-label="Opções de Acessibilidade">
+  <div class="barra-acessibilidade" role="banner">
     <div class="recipiente">
-      <button class="btn-acesso" onclick="alterarFonte('diminuir')" aria-label="Diminuir texto">A-</button>
-      <button class="btn-acesso" onclick="alterarFonte('aumentar')" aria-label="Aumentar texto">A+</button>
-      <button class="btn-acesso" onclick="alternarContraste()" aria-label="Mudar para Alto Contraste">Alto Contraste</button>
+      <button class="btn-acesso" onclick="alterarFonte('diminuir')">A-</button>
+      <button class="btn-acesso" onclick="alterarFonte('aumentar')">A+</button>
+      <button class="btn-acesso" onclick="alternarContraste()">Alto Contraste</button>
     </div>
   </div>
 
-  <!-- Contêiner principal da aplicação (Dashboard SaaS) -->
   <div id="visao-transparencia" role="main">
     
-    <!-- =========================================================================
-         BLOCO 6: CABEÇALHO SUPERIOR (Top Bar)
-         ========================================================================= -->
     <header class="cabecalho-transparencia">
       <div class="recipiente cabecalho-conteiner">
         <div class="logotipo">
-          <svg width="32" height="32" viewBox="0 0 50 50" fill="none" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 50 50" fill="none">
             <rect width="50" height="50" rx="8" fill="var(--vinho-principal)"/>
             <path d="M15 25H35M15 15H35M15 35H25" stroke="var(--dourado-destaque)" stroke-width="4" stroke-linecap="round"/>
           </svg>
           Portal da Transparência
         </div>
-        <!-- Rota de saída do sistema voltando para a Landing Page na raiz -->
-        <a href="../index.html" class="botao-voltar" aria-label="Voltar para a página inicial">← Voltar ao Site Institucional</a>
+        <a href="../index.html" class="botao-voltar">← Voltar ao Site Institucional</a>
       </div>
     </header>
 
-    <!-- Grid que separa a tela em duas colunas no Desktop (Menu Lateral 280px / Conteúdo Restante) -->
     <div class="layout-transparencia">
       
-      <!-- =========================================================================
-           BLOCO 7: MENU LATERAL (Sidebar)
-           Arquitetura consolidada para não sobrecarregar a administração da Santa Casa
-           ========================================================================= -->
       <aside class="barra-lateral-sistema">
         <div class="cabecalho-barra">
           <h3>Módulos Gestão Pública</h3>
         </div>
-        <!-- O JS pega o evento de clique (onclick) para trocar as abas -->
-        <nav id="menu-transparencia" role="tablist" aria-label="Navegação dos Módulos">
-          <button class="aba-link ativo" onclick="abrirAba(event, 'aba-financas')" role="tab">📊 Orçamento e Finanças</button>
-          <button class="aba-link" onclick="abrirAba(event, 'aba-repasses')" role="tab">🏦 Repasses e Convênios</button>
-          <button class="aba-link" onclick="abrirAba(event, 'aba-licitacoes')" role="tab">📜 Licitações e Contratos</button>
-          <button class="aba-link" onclick="abrirAba(event, 'aba-rh')" role="tab">👥 Recursos Humanos</button>
-          <button class="aba-link" onclick="abrirAba(event, 'aba-governanca')" role="tab">📁 Governança e Relatórios</button>
-          <button class="aba-link" onclick="abrirAba(event, 'aba-lgpd')" role="tab">🛡️ LGPD e Ouvidoria</button>
+        <nav id="menu-transparencia" role="tablist">
+          <button class="aba-link ativo" onclick="abrirAba(event, 'aba-financas')">📊 Orçamento e Finanças</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-repasses')">🏦 Repasses e Convênios</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-licitacoes')">📜 Licitações e Contratos</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-rh')">👥 Recursos Humanos</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-governanca')">📁 Governança e Relatórios</button>
+          <button class="aba-link" onclick="abrirAba(event, 'aba-lgpd')">🛡️ LGPD e Ouvidoria</button>
         </nav>
       </aside>
 
-      <!-- =========================================================================
-           BLOCO 8: ÁREA DE DADOS (Main Content)
-           Aqui ficam os painéis. Apenas o painel com a classe 'ativo' aparece.
-           ========================================================================= -->
       <main>
         
-        <!-- PAINEL 1: ORÇAMENTO E FINANÇAS -->
         <div id="aba-financas" class="painel-conteudo ativo" role="tabpanel">
           <div class="cabecalho-painel">
             <h2>Execução Orçamentária e Financeira</h2>
             <span class="etiqueta etiqueta-info">Exercício Atual</span>
           </div>
           
-          <!-- Formulário de Filtro de Dados -->
-          <form class="barra-filtros">
+          <form class="barra-filtros" id="form-filtro-financas" onsubmit="aplicarFiltros(event)">
             <div class="grupo-filtro">
               <label>Ano Exercício</label>
-              <select class="campo-filtro"><option>2026</option><option>2025</option></select>
+              <select name="ano" class="campo-filtro"><option value="2026">2026</option><option value="2025">2025</option></select>
             </div>
             <div class="grupo-filtro">
               <label>Mês Referência</label>
-              <select class="campo-filtro"><option>Todos os meses</option><option>Junho</option><option>Maio</option></select>
+              <select name="mes" class="campo-filtro"><option value="todos">Todos os meses</option><option value="06">Junho</option></select>
             </div>
-            <button type="button" class="botao-filtrar">Aplicar Filtros</button>
+            <button type="submit" class="botao-filtrar">Aplicar Filtros</button>
           </form>
 
-          <!-- Cards Rápidos (Dashboards resumidos) -->
           <div class="grade-resumo">
             <div class="cartao-resumo">
               <div class="titulo-resumo">ARRECADAÇÃO TOTAL REALIZADA</div>
@@ -142,124 +87,236 @@
             </div>
           </div>
 
-          <!-- Tabela de Dados (Embrulhada na div .tabela-responsiva para rolagem touch no celular) -->
           <div class="bloco-dados">
-            <div class="titulo-bloco">Detalhamento de Receitas e Despesas (Mensal)</div>
+            <div class="titulo-bloco">Detalhamento Mensal</div>
             <div class="tabela-responsiva">
-              <table>
-                <thead>
-                  <tr><th>Competência</th><th>Receita Realizada (R$)</th><th>Despesa Paga (R$)</th><th>Situação</th><th>Baixar Relatório</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Maio/2026</td><td>845.230,00</td><td>790.150,00</td><td><span class="etiqueta etiqueta-sucesso">Superávit</span></td><td><a href="#" class="link-acao">📄 Balancete PDF</a></td></tr>
-                  <tr><td>Abril/2026</td><td>810.000,00</td><td>822.000,00</td><td><span class="etiqueta etiqueta-info">Déficit</span></td><td><a href="#" class="link-acao">📄 Balancete PDF</a></td></tr>
+              <table id="tabela-financas">
+                <thead><tr><th>Competência</th><th>Receita (R$)</th><th>Despesa (R$)</th><th>Situação</th><th>Relatório</th></tr></thead>
+                <tbody id="corpo-tabela-financas">
+                  <tr class="linha-dados">
+                    <td>Maio/2026</td><td>845.230,00</td><td>790.150,00</td>
+                    <td><span class="etiqueta etiqueta-sucesso">Superávit</span></td>
+                    <td><a href="#" class="link-acao">📄 Balancete PDF</a></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
 
-        <!-- PAINEL 2: REPASSES E TRANSFERÊNCIAS -->
         <div id="aba-repasses" class="painel-conteudo" role="tabpanel">
           <div class="cabecalho-painel"><h2>Convênios, Repasses e Emendas Parlamentares</h2></div>
-          <div class="bloco-dados">
-            <div class="titulo-bloco">Recursos de Terceiros e SUS</div>
-            <div class="tabela-responsiva">
-              <table>
-                <thead><tr><th>Origem / Portaria</th><th>Finalidade (Objeto)</th><th>Data do Crédito</th><th>Valor (R$)</th><th>Prestação de Contas</th></tr></thead>
-                <tbody>
-                  <tr><td>Emenda Parlamentar - Dep. XYZ</td><td>Aquisição de Raio-X Digital</td><td>10/06/2026</td><td>R$ 150.000,00</td><td><a href="#" class="link-acao">📄 Ver PDF</a></td></tr>
-                  <tr><td>FNS - Bloco Custeio MAC</td><td>Incentivo Leitos UTI</td><td>05/06/2026</td><td>R$ 80.000,00</td><td><a href="#" class="link-acao">📄 Ver PDF</a></td></tr>
-                </tbody>
-              </table>
+          
+          <form class="barra-filtros" id="form-pesquisa-repasses" onsubmit="aplicarFiltros(event)">
+            <div class="grupo-filtro">
+              <label>Buscar Repasse, Convênio ou Emenda</label>
+              <input type="text" name="busca" class="campo-filtro" placeholder="Ex: Emenda Deputado, Custeio MAC...">
+            </div>
+            <button type="submit" class="botao-filtrar">Pesquisar</button>
+          </form>
+
+          <nav class="nav-sub-abas">
+            <button class="btn-sub-aba ativo" onclick="abrirSubAba(event, 'sub-emendas', 'grupo-repasses')">Emendas Parlamentares</button>
+            <button class="btn-sub-aba" onclick="abrirSubAba(event, 'sub-convenios', 'grupo-repasses')">Convênios</button>
+            <button class="btn-sub-aba" onclick="abrirSubAba(event, 'sub-repasses', 'grupo-repasses')">Repasses Fundo a Fundo</button>
+          </nav>
+
+          <div id="sub-emendas" class="sub-painel ativo grupo-repasses">
+            <div class="bloco-dados">
+              <div class="tabela-responsiva">
+                <table id="tabela-emendas">
+                  <thead><tr><th>Esfera</th><th>Autor / Portaria</th><th>Finalidade (Objeto)</th><th>Valor (R$)</th><th>Prestação</th></tr></thead>
+                  <tbody>
+                    <tr class="linha-dados">
+                      <td><span class="etiqueta etiqueta-info">Federal</span></td><td>Dep. XYZ (Emenda Individual)</td>
+                      <td>Aquisição de Raio-X Digital</td><td>R$ 150.000,00</td><td><a href="#" class="link-acao">📄 Ver PDF</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div id="sub-convenios" class="sub-painel grupo-repasses">
+            <div class="bloco-dados">
+              <div class="tabela-responsiva">
+                <table id="tabela-convenios">
+                  <thead><tr><th>Esfera</th><th>Órgão Concedente</th><th>Objeto do Convênio</th><th>Valor (R$)</th><th>Status Oficial</th></tr></thead>
+                  <tbody>
+                    <tr class="linha-dados">
+                      <td><span class="etiqueta" style="background:#f1f5f9; color:#475569;">Municipal</span></td><td>Sec. Saúde Lima Duarte</td>
+                      <td>Custeio Plantão Pronto Socorro</td><td>R$ 800.000,00</td><td><a href="#" class="link-acao">📄 Contrato PDF</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div id="sub-repasses" class="sub-painel grupo-repasses">
+            <div class="bloco-dados">
+              <div class="tabela-responsiva">
+                <table id="tabela-fundo">
+                  <thead><tr><th>Esfera</th><th>Bloco de Financiamento</th><th>Competência</th><th>Valor (R$)</th><th>Comprovante</th></tr></thead>
+                  <tbody>
+                    <tr class="linha-dados">
+                      <td><span class="etiqueta etiqueta-sucesso">Estadual</span></td><td>FES - Rede Resposta</td>
+                      <td>Maio/2026</td><td>R$ 45.000,00</td><td><a href="#" class="link-acao">📄 Ver PDF</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- PAINEL 3: LICITAÇÕES E CONTRATOS (Consolidados) -->
         <div id="aba-licitacoes" class="painel-conteudo" role="tabpanel">
           <div class="cabecalho-painel"><h2>Processos Licitatórios, Compras e Contratos</h2></div>
-          <form class="barra-filtros">
+          
+          <form class="barra-filtros" id="form-pesquisa-licitacoes" onsubmit="aplicarFiltros(event)">
             <div class="grupo-filtro">
-              <label>Modalidade ou Fornecedor</label>
-              <input type="text" class="campo-filtro" placeholder="Ex: Pregão, Clean Ambiental...">
+              <label>Buscar Fornecedor ou Objeto</label>
+              <input type="text" name="busca" class="campo-filtro" placeholder="Ex: Clean Ambiental, Medicamentos...">
             </div>
-            <button type="button" class="botao-filtrar">Pesquisar</button>
+            <button type="submit" class="botao-filtrar">Pesquisar</button>
           </form>
-          <div class="bloco-dados">
-            <div class="tabela-responsiva">
-              <table>
-                <thead><tr><th>Processo / Contrato</th><th>Objeto Licitado / Fornecedor</th><th>Situação</th><th>Valor (R$)</th><th>Arquivos Oficiais</th></tr></thead>
-                <tbody>
-                  <tr><td>Pregão 045/2026 (MedSul)</td><td>Aquisição de medicamentos contínuos</td><td><span class="etiqueta etiqueta-sucesso">Homologado</span></td><td>R$ 240.000,00</td><td><a href="#" class="link-acao">📄 Edital PDF</a> | <a href="#" class="link-acao">📄 Contrato PDF</a></td></tr>
-                  <tr><td>Dispensa 008/2026 (Clean AMB)</td><td>Serviços de higienização hospitalar</td><td><span class="etiqueta etiqueta-info">Em Andamento</span></td><td>R$ 315.000,00</td><td><a href="#" class="link-acao">📄 Termo de Ref. PDF</a></td></tr>
-                </tbody>
-              </table>
+
+          <nav class="nav-sub-abas">
+            <button class="btn-sub-aba ativo" onclick="abrirSubAba(event, 'sub-pregoes', 'grupo-licitacoes')">Pregões e Concorrências</button>
+            <button class="btn-sub-aba" onclick="abrirSubAba(event, 'sub-dispensas', 'grupo-licitacoes')">Dispensas e Inexigibilidade</button>
+          </nav>
+
+          <div id="sub-pregoes" class="sub-painel ativo grupo-licitacoes">
+            <div class="bloco-dados">
+              <div class="tabela-responsiva">
+                <table id="tabela-pregoes">
+                  <thead><tr><th>Processo</th><th>Objeto Licitado / Fornecedor</th><th>Situação</th><th>Valor (R$)</th><th>Arquivos Oficiais</th></tr></thead>
+                  <tbody>
+                    <tr class="linha-dados">
+                      <td>Pregão 045/2026</td><td>Medicamentos contínuos (MedSul)</td><td><span class="etiqueta etiqueta-sucesso">Homologado</span></td>
+                      <td>R$ 240.000,00</td><td><a href="#" class="link-acao">📄 Edital</a> | <a href="#" class="link-acao">📄 Contrato</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div id="sub-dispensas" class="sub-painel grupo-licitacoes">
+            <div class="bloco-dados">
+              <div class="tabela-responsiva">
+                <table id="tabela-dispensas">
+                  <thead><tr><th>Processo</th><th>Fornecedor e Justificativa</th><th>Fundamento Legal</th><th>Valor (R$)</th><th>Arquivos</th></tr></thead>
+                  <tbody>
+                    <tr class="linha-dados">
+                      <td>Dispensa 008/2026</td><td>Higienização hospitalar (Clean AMB)</td><td>Lei 14.133</td>
+                      <td>R$ 315.000,00</td><td><a href="#" class="link-acao">📄 Termo de Ref.</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- PAINEL 4: RECURSOS HUMANOS (Junta Folha de Pagamento e Diárias) -->
         <div id="aba-rh" class="painel-conteudo" role="tabpanel">
           <div class="cabecalho-painel"><h2>Recursos Humanos, Remuneração e Diárias</h2></div>
           
-          <div class="bloco-dados">
-            <div class="titulo-bloco">Folha de Pagamento Sintética (Cargos Base)</div>
-            <div class="tabela-responsiva">
-              <table>
-                <thead><tr><th>Categoria / Cargo</th><th>Qtd. Servidores</th><th>Piso/Base Salarial (R$)</th><th>Folha Completa</th></tr></thead>
-                <tbody>
-                  <tr><td>Enfermeiro(a) Padrão (CLT)</td><td>8</td><td>R$ 4.750,00</td><td><a href="#" class="link-acao">📄 Relatório PDF</a></td></tr>
-                  <tr><td>Médico(a) Plantonista (PJ)</td><td>12</td><td>R$ 1.200,00 (Por Plantão)</td><td><a href="#" class="link-acao">📄 Relatório PDF</a></td></tr>
-                </tbody>
-              </table>
+          <form class="barra-filtros" id="form-pesquisa-rh" onsubmit="aplicarFiltros(event)">
+            <div class="grupo-filtro">
+              <label>Buscar Servidor, Cargo ou Favorecido</label>
+              <input type="text" name="busca" class="campo-filtro" placeholder="Ex: Enfermeiro, João Silva...">
+            </div>
+            <button type="submit" class="botao-filtrar">Pesquisar</button>
+          </form>
+
+          <nav class="nav-sub-abas">
+            <button class="btn-sub-aba ativo" onclick="abrirSubAba(event, 'sub-folha', 'grupo-rh')">Folha de Pagamento</button>
+            <button class="btn-sub-aba" onclick="abrirSubAba(event, 'sub-diarias', 'grupo-rh')">Diárias e Passagens</button>
+          </nav>
+
+          <div id="sub-folha" class="sub-painel ativo grupo-rh">
+            <div class="bloco-dados">
+              <div class="tabela-responsiva">
+                <table id="tabela-folha-rh">
+                  <thead><tr><th>Categoria / Cargo</th><th>Qtd. Servidores</th><th>Base Salarial (R$)</th><th>Folha Completa</th></tr></thead>
+                  <tbody>
+                    <tr class="linha-dados"><td>Enfermeiro(a) Padrão</td><td>8</td><td>R$ 4.750,00</td><td><a href="#" class="link-acao">📄 Relatório PDF</a></td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
-          <div class="bloco-dados">
-            <div class="titulo-bloco">Concessão de Diárias e Passagens</div>
-            <div class="tabela-responsiva">
-              <table>
-                <thead><tr><th>Beneficiário</th><th>Cargo/Função</th><th>Destino / Motivo</th><th>Período</th><th>Valor (R$)</th><th>Comprovante</th></tr></thead>
-                <tbody>
-                  <tr><td>João Silva Costa</td><td>Provedor</td><td>Belo Horizonte/MG (Reunião SES)</td><td>12 a 14/05/2026</td><td>R$ 850,00</td><td><a href="#" class="link-acao">📄 Recibo PDF</a></td></tr>
-                </tbody>
-              </table>
+          <div id="sub-diarias" class="sub-painel grupo-rh">
+            <div class="bloco-dados">
+              <div class="tabela-responsiva">
+                <table id="tabela-diarias">
+                  <thead><tr><th>Beneficiário</th><th>Cargo/Função</th><th>Destino / Motivo</th><th>Valor (R$)</th><th>Comprovante</th></tr></thead>
+                  <tbody>
+                    <tr class="linha-dados"><td>João Silva Costa</td><td>Provedor</td><td>BH (Reunião SES)</td><td>R$ 850,00</td><td><a href="#" class="link-acao">📄 Recibo PDF</a></td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- PAINEL 5: GOVERNANÇA E RELATÓRIOS -->
         <div id="aba-governanca" class="painel-conteudo" role="tabpanel">
           <div class="cabecalho-painel"><h2>Governança Pública, Relatórios e Sanções</h2></div>
+          
+          <form class="barra-filtros" id="form-pesquisa-governanca" onsubmit="aplicarFiltros(event)">
+            <div class="grupo-filtro">
+              <label>Buscar Relatório ou Documento Oficial</label>
+              <input type="text" name="busca" class="campo-filtro" placeholder="Ex: RAG 2025, Parecer de Auditoria...">
+            </div>
+            <button type="submit" class="botao-filtrar">Pesquisar</button>
+          </form>
+
           <div class="bloco-dados">
             <div class="tabela-responsiva">
-              <table>
+              <table id="tabela-relatorios">
                 <thead><tr><th>Tipo de Documento</th><th>Descrição</th><th>Ano Referência</th><th>Arquivo (PDF)</th></tr></thead>
                 <tbody>
-                  <tr><td>Relatório Anual de Gestão (RAG)</td><td>Prestação de contas do exercício anual da instituição.</td><td>2025</td><td><a href="#" class="link-acao">📄 Baixar PDF</a></td></tr>
-                  <tr><td>Parecer de Auditoria Externa</td><td>Documentação de regularidade fiscal e contábil.</td><td>2025</td><td><a href="#" class="link-acao">📄 Baixar PDF</a></td></tr>
-                  <tr><td>Registro de Sanções Administrativas</td><td>Empresas penalizadas/suspensas de licitar.</td><td>2026</td><td><a href="#" class="link-acao">📄 Baixar PDF</a></td></tr>
+                  <tr class="linha-dados"><td>Relatório Anual de Gestão (RAG)</td><td>Prestação de contas do exercício anual.</td><td>2025</td><td><a href="#" class="link-acao">📄 Baixar PDF</a></td></tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
 
-        <!-- PAINEL 6: LGPD E OUVIDORIA -->
         <div id="aba-lgpd" class="painel-conteudo" role="tabpanel">
           <div class="cabecalho-painel"><h2>Proteção de Dados (LGPD) e Canais de Comunicação</h2></div>
-          <div class="grade-resumo">
-            <div class="cartao-resumo" style="text-align: center;">
+
+          <nav class="nav-sub-abas">
+            <button class="btn-sub-aba ativo" onclick="abrirSubAba(event, 'sub-lgpd', 'grupo-lgpd')">🛡️ Proteção de Dados (LGPD)</button>
+            <button class="btn-sub-aba" onclick="abrirSubAba(event, 'sub-ouvidoria', 'grupo-lgpd')">📢 Ouvidoria e e-SIC</button>
+          </nav>
+
+          <div id="sub-lgpd" class="sub-painel ativo grupo-lgpd">
+            <div class="cartao-resumo" style="text-align: center; border-top: 4px solid var(--vinho-principal);">
               <h3 style="color:var(--vinho-principal); margin-bottom: 10px;">Lei Geral de Proteção de Dados</h3>
-              <p style="font-size: 0.85rem; color: var(--texto-suave); margin-bottom: 15px;">Acesse nosso manual de conduta sobre como seus dados médicos são protegidos.</p>
-              <a href="#" class="botao-filtrar" style="display:inline-block; text-decoration:none;">📄 Política de Privacidade (PDF)</a>
+              <p style="font-size: 1rem; color: var(--texto-suave); margin-bottom: 20px;">Acesse nosso manual de conduta e política de privacidade.</p>
+              <a href="#" class="link-acao" style="background: var(--vinho-principal); color: #fff; padding: 0.8rem 2rem; border-radius: 6px; display: inline-block; text-decoration: none;">📄 Baixar Política de Privacidade (PDF)</a>
             </div>
-            <div class="cartao-resumo" style="text-align: center;">
-              <h3 style="color:var(--vinho-principal); margin-bottom: 10px;">Ouvidoria / e-SIC</h3>
-              <p style="font-size: 0.85rem; color: var(--texto-suave); margin-bottom: 15px;">Solicite informações, faça denúncias, reclamações ou elogios diretamente à administração.</p>
-              <!-- Link mailto: abre o programa de e-mail do paciente direto no celular -->
-              <a href="mailto:ouvidoria@santacasa.org.br" class="botao-filtrar" style="display:inline-block; text-decoration:none;">📧 Enviar E-mail</a>
+          </div>
+
+          <div id="sub-ouvidoria" class="sub-painel grupo-lgpd">
+            <div class="grade-resumo">
+              <div class="cartao-resumo">
+                <h3 style="color:var(--vinho-principal); font-size: 1.2rem; margin-bottom: 10px;">Serviço de Informação (e-SIC)</h3>
+                <p style="font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 15px;">Solicite informações públicas sobre a gestão do hospital conforme a Lei de Acesso à Informação.</p>
+                <a href="#" class="botao-filtrar" style="display:block; text-align:center; text-decoration:none;">Acessar Formulário e-SIC</a>
+              </div>
+              <div class="cartao-resumo">
+                <h3 style="color:var(--vinho-principal); font-size: 1.2rem; margin-bottom: 10px;">Canais da Ouvidoria</h3>
+                <p style="font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 15px;">Para elogios, sugestões, reclamações ou denúncias, utilize nossos canais oficiais.</p>
+                <div style="background: var(--fundo-cinza); padding: 10px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 15px;">
+                  <strong>📧 E-mail:</strong> ouvidoria@santacasald.org.br<br>
+                  <strong>📞 Telefone:</strong> (32) 3281-XXXX
+                </div>
+                <a href="mailto:ouvidoria@santacasald.org.br" class="botao-filtrar" style="display:block; text-align:center; text-decoration:none;">Enviar E-mail Direto</a>
+              </div>
             </div>
           </div>
         </div>
@@ -269,7 +326,6 @@
   </div>
 </div>
 
-<!-- Importação do arquivo JavaScript isolado do portal para não conflitar com a landing page -->
 <script src="./portal.js"></script>
 </body>
 </html>
