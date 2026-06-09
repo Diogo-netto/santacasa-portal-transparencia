@@ -28,6 +28,19 @@ function alternarSubmenuMobile(evento) {
   }
 }
 
+// Fecha o menu automaticamente quando um link é clicado
+document.getElementById('menu-navegacao').addEventListener('click', function(event) {
+  // Verifica se o elemento clicado é um link (tag <a>)
+  if (event.target.tagName === 'A') {
+    const menu = document.getElementById('menu-navegacao');
+    const botao = document.querySelector('.botao-mobile');
+    
+    // Remove a classe aberto e atualiza a acessibilidade
+    menu.classList.remove('aberto');
+    botao.setAttribute('aria-expanded', 'false');
+  }
+});
+
 function animarContadores() {
   const contadores = document.querySelectorAll('.numero-contador');
   const velocidade = 200; 
