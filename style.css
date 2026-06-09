@@ -511,7 +511,7 @@ body.alto-contraste .secao-rodape p, body.alto-contraste .secao-rodape a { color
   .hero-banner h1 { font-size: 1.8rem; }
   .barra-acessibilidade .recipiente { justify-content: center; gap: 1rem; }
   .grade-estatisticas { gap: 1rem; }
-  .item-estatistica { width: 170px; height: 170px; }
+  .item-estatistica { width: 190px; height: 190px; }
   .numero-contador { font-size: 1.8rem; }
   .rotulo-estatistica { font-size: 0.75rem; }
   .item-estatistica svg { width: 30px; height: 30px; }
