@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Portal Institucional e da Transparência da Santa Casa de Misericórdia de Lima Duarte.">
+  <meta name="author" content="AstroByte Tech Innovation">
+  <meta name="robots" content="index, follow">
+  
+  <title>Modelo de Página Interna | Santa Casa de Lima Duarte</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="envoltorio-pagina">
+
+  <div class="barra-acessibilidade" role="banner">
+    <div class="recipiente">
+      <button class="btn-acesso" onclick="alterarFonte('diminuir')" aria-label="Diminuir tamanho da fonte">A-</button>
+      <button class="btn-acesso" onclick="alterarFonte('aumentar')" aria-label="Aumentar tamanho da fonte">A+</button>
+      <button class="btn-acesso" onclick="alternarContraste()" aria-label="Ativar modo de Alto Contraste">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/></svg> Alto Contraste
+      </button>
+    </div>
+  </div>
+
+  <div id="visao-institucional" role="main">
+    
+    <header class="cabecalho-site">
+      <div class="recipiente cabecalho-conteiner">
+        <a href="index.html" class="logotipo" aria-label="Página inicial Santa Casa de Lima Duarte">
+          <svg width="40" height="40" viewBox="0 0 50 50" fill="none" aria-hidden="true">
+            <rect width="50" height="50" rx="8" fill="var(--branco)"/>
+            <path d="M25 15V35M15 25H35" stroke="var(--dourado-destaque)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          Santa Casa de Lima Duarte
+        </a>
+        
+        <button class="botao-mobile" onclick="alternarMenuMobile()" aria-label="Abrir menu de navegação" aria-expanded="false">☰</button>
+        
+        <nav class="nav-primaria" id="menu-navegacao" role="navigation" aria-label="Menu principal">
+          <ul class="menu-principal">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#historia">História</a></li>
+            <li><a href="index.html#noticias">Notícias</a></li>
+            <li><a href="index.html#atendimento">Atendimento</a></li>
+            <li><a href="index.html#corpo-clinico">Corpo Clínico</a></li>
+            
+            <li class="menu-dropdown">
+              <a href="javascript:void(0);" onclick="alternarSubmenuMobile(event)" aria-haspopup="true" aria-expanded="false">Doações ⌄</a>
+              <div class="conteudo-dropdown" role="menu">
+                <a href="index.html#doacoes" role="menuitem">Como doar? (PIX)</a>
+              </div>
+            </li>
+            
+            <li><a href="Portal/index.html" class="botao-transparencia" aria-label="Acessar o Portal da Transparência">📊 Portal da Transparência</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="secao-espacamento secao-fundo-alt">
+        <div class="recipiente" style="max-width: 800px; margin: 0 auto; background: var(--branco); padding: 3rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--borda-cor);">
+          
+          <span style="color: var(--dourado-escuro); font-weight: 600; display: block; margin-bottom: 0.5rem;">
+            Inserir Data ou Categoria Aqui
+          </span>
+          
+          <h1 style="color: var(--vinho-principal); font-size: 2.2rem; margin-bottom: 1.5rem; line-height: 1.2;">
+            Título Principal do Serviço ou Notícia Detalhada
+          </h1>
+
+          <img src="img/fachada-hospital.png" style="width: 100%; border-radius: 8px; margin-bottom: 2rem; border: 2px solid var(--borda-cor);" alt="Imagem descritiva">
+
+          <div style="font-size: 1.1rem; color: var(--texto-escuro); line-height: 1.8;">
+            <p style="margin-bottom: 1.5rem;">
+              Este é o parágrafo base do seu template. Quando você clonar este arquivo para criar as páginas específicas (como as notícias, a listagem de especialidades clínicas ou as normas de visitas), você alterará apenas os textos contidos dentro desta caixa branca.
+            </p>
+            
+            <p style="margin-bottom: 1.5rem;">
+              Toda a estilização global e as regras de Alto Contraste herdadas do arquivo CSS principal estão ativas aqui. O texto mudará para branco e os fundos ficarão pretos automaticamente quando o botão de acessibilidade for clicado.
+            </p>
+
+            <div style="margin-top: 3rem; text-align: center;">
+              <a href="#" class="botao-primario">📄 Baixar Documento Associado (PDF)</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape" role="contentinfo">
+      <div class="recipiente grade-rodape">
+        <div class="secao-rodape">
+          <h4>Santa Casa</h4>
+          <p>Compromisso com a saúde e bem-estar da população de Lima Duarte e região.</p>
+        </div>
+        <div class="secao-rodape" role="navigation" aria-label="Links rápidos">
+          <h4>Acesso Rápido</h4>
+          <a href="index.html#historia">Nossa História</a>
+          <a href="index.html#corpo-clinico">Corpo Clínico</a>
+          <a href="Portal/index.html">Transparência Pública</a>
+        </div>
+        <div class="secao-rodape">
+          <h4>Contato</h4>
+          <p>Portaria: (32) 3281-1222</p>
+          <p>Administração: (32) 3281-1410</p>
+          <p>CEP: 36140-000 - Lima Duarte, MG</p>
+        </div>
+      </div>
+      <div class="direitos-rodape">
+        <p>&copy; 2026 Santa Casa de Misericórdia de Lima Duarte. Todos os direitos reservados. Design por AstroByte Tech.</p>
+      </div>
+    </footer>
+  </div>
+</div> 
+
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
