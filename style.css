@@ -478,7 +478,6 @@ body.alto-contraste .rodape { background-color: #000000; border-top: 4px solid #
 body.alto-contraste .secao-rodape p, body.alto-contraste .secao-rodape a { color: #ffffff; }
 .secao-rodape a:hover { color: var(--dourado-destaque); }
 .direitos-rodape { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); }
-
 /* RESPONSIVIDADE */
 @media (max-width: 992px) {
   .botao-mobile { display: block; margin-left: auto; }
@@ -510,9 +509,24 @@ body.alto-contraste .secao-rodape p, body.alto-contraste .secao-rodape a { color
   .logotipo svg { width: 30px; height: 30px; }
   .hero-banner h1 { font-size: 1.8rem; }
   .barra-acessibilidade .recipiente { justify-content: center; gap: 1rem; }
-  .grade-estatisticas { gap: 1rem; }
-  .item-estatistica { width: 190px; height: 190px; }
+  
+  /* =======================================================
+     MUDANÇA: ESTATÍSTICAS FORÇADAS A FICAR DE 2 EM 2
+     ======================================================= */
+  .grade-estatisticas { 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Força 2 colunas proporcionais */
+    gap: 1rem; 
+  }
+  .item-estatistica { 
+    width: 100%; /* Ocupa o espaço da sua própria coluna */
+    height: auto; 
+    aspect-ratio: 1 / 1; /* Mantém o formato perfeitamente quadrado */
+    padding: 1rem 0.5rem; 
+  }
+  /* ======================================================= */
+  
   .numero-contador { font-size: 1.8rem; }
-  .rotulo-estatistica { font-size: 0.75rem; }
+  .rotulo-estatistica { font-size: 0.75rem; word-wrap: break-word; } /* Permite quebrar linha se a palavra for longa */
   .item-estatistica svg { width: 30px; height: 30px; }
 }
